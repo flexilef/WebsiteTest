@@ -1,0 +1,143 @@
+/*
+.color-primary-0 { color: #2B516F } lightest pastel blue
+.color-primary-1 { color: #84A7C3 } light pastel blue Primary color
+.color-primary-2 { color: #4E7593 } dark pastel blue
+.color-primary-3 { color: #12334B } aquamarine blue
+.color-primary-4 { color: #041827 } darkest blue
+.color-primary-4 { color: #E7EFF5 } whitish
+*/
+
+/*
+.color-primary-0 { color: #5AA814 }	 
+.color-primary-1 { color: #DDF6C7 }
+.color-primary-2 { color: #AEEA79 }
+.color-primary-3 { color: #1D3E00 }
+.color-primary-4 { color: #081100 }
+*/
+
+/*
+.color-primary-0 { color: #360000 } dark red	Main Primary color
+.color-primary-1 { color: #2A0000 } darkest red
+.color-primary-2 { color: #460303 } light dark red
+.color-primary-3 { color: #730000 } deep red
+.color-primary-4 { color: #A80000 } reg red
+.color-primary-5 { color: #E7EFF5 } whitish
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    line-height: 1;
+    color: black;
+    background: white;
+    margin: 0;
+    padding: 0;
+    font-family: Garamond, serif;
+}
+
+#header {
+    background-color: black;
+    width: 100%;
+    height: 50px;
+}
+
+#nav-menu {    
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+    #nav-menu ul {
+	//background-color: yellow;
+        position: relative; 
+        float: left; 
+        left: 50%; 
+	padding: 0;
+	list-style-type: none;
+    }
+	
+    #nav-menu ul li:first-child {
+	//background-color: blue;
+	//width: 80px;
+    }
+	
+    #nav-menu ul li {
+	//background-color: blue;
+	display: inline-block;
+	text-align: center;
+        position: relative; 
+        float: left; 
+        right: 50%; 
+    }
+	
+    #nav-menu ul li a {
+	background-color: black;	
+        color: white;		
+        font-size: 30px;
+	display: inline-block;
+        margin: 0;
+        padding: 0 20px 0 20px;
+	line-height: 50px; /*vertically aligns text to the center*/	
+        text-decoration: none;
+    }
+        
+        #nav-menu ul li:hover:first-child a {
+            //color: orange;
+        }
+	
+	#nav-menu ul li a:hover {
+            background-color: black;
+            color: gray;
+	}
+
+#main {    
+    //background-color: yellow;
+    min-height: 100%;
+}
+
+    #main-content {
+        //background-color: purple;        
+        color: black;        
+        margin: 6% 12% 0 12%;
+        padding-bottom: 80px; /*needs to be at least the same length as footer height*/
+        overflow: auto;
+    }
+    
+    .frame {
+        border-style: solid;
+        border-width: 5px;
+        width: 400px;
+        height: 275px;
+    }
+
+#footer {
+    background-color: black;    
+    color: #E7EFF5;    
+    height: 40px;
+    position: relative;
+    margin-top: -40px;
+    clear: both;
+    text-align: center;
+    line-height: 40px;
+}
+
+    #footer p {
+        margin: 0;
+        padding: 0;
+    }
