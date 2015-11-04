@@ -45,14 +45,15 @@ html, body {
 body {
     line-height: 1;
     color: black;
-    background: white;
+    background-color: black;
     margin: 0;
     padding: 0;
     font-family: Garamond, serif;
+    font-size: 20px;
 }
 
 #header {
-    background-color: black;
+    background-color: black;  
     width: 100%;
     height: 50px;
 }
@@ -69,7 +70,6 @@ body {
         float: left; 
         left: 50%; 
 	padding: 0;
-	list-style-type: none;
     }
 	
     #nav-menu ul li:first-child {
@@ -107,28 +107,46 @@ body {
 	}
 
 #main {    
-    //background-color: yellow;
+    background-color: white;
     min-height: 100%;
 }
 
     #main-content {
-        //background-color: purple;        
-        color: black;        
-        margin: 6% 12% 0 12%;
+        margin: 5% 12% 0 12%;
         padding-bottom: 80px; /*needs to be at least the same length as footer height*/
         overflow: auto;
     }
     
-    .frame {
-        border-style: solid;
-        border-width: 5px;
-        width: 400px;
-        height: 275px;
+    #main-content h1 {
+        text-align: center;
+        margin-bottom: 5%;
     }
+    
+    #main-content .link-frame {
+        border-style: solid;
+        border-color: black;
+        border-width: 10px;
+        background-color: white;
+    }
+    
+    #main-content #frame-space {
+        overflow: hidden;
+    }
+
+    #main-content #frame-space ul {
+        font-size: 0;
+        text-align: center
+    }
+    
+    #main-content #frame-space ul li {
+        display: inline-block;
+        background-color: blue;
+        margin: 2%;
+    }    
 
 #footer {
     background-color: black;    
-    color: #E7EFF5;    
+    color: white;    
     height: 40px;
     position: relative;
     margin-top: -40px;
