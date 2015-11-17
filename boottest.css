@@ -1,0 +1,107 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 8, 2015, 9:03:44 PM
+    Author     : Flex
+*/
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -120px;
+  /* Pad bottom by footer height */
+  padding: 0 0 120px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 120px;
+  background-color: black;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+#wrap .nav {
+    float: right;
+}
+
+#wrap > .container .page-header {
+    //background-color: green;
+    text-align: center;
+}
+#wrap > .container .page-content {
+    //background-color: yellow;
+}
+
+#footer > .container{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#footer > .container p {
+    //background-color: pink;
+    text-align: center;
+    margin: 0;
+}
+
+#footer > .container ul {  
+    //background-color: blue;
+    list-style-type: none;
+    margin: 20px;
+    padding: 0;
+    text-align: center;
+}
+
+#footer > .container ul li {
+    //background-color: yellow;
+    display: inline;
+    margin: 20px;
+}
+
+#footer li a {
+    display: inline-block;
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+    text-decoration: none;
+    cursor: pointer;
+    background-size: 32px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#footer li a.facebook {
+    background-image: url(assets/facebook.png);
+}
+
+#footer li a.twitter {
+    background-image: url(assets/twitter.png);
+}
+
+#footer li a.github {
+    background-image: url(assets/github_alt.png);
+}
+
+#footer li a:hover.expand {
+    background-size: 64px;
+    transition: background .2s ease-in-out;
+}
+
+code {
+  font-size: 80%;
+}

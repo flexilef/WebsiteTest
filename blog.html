@@ -6,56 +6,64 @@ and open the template in the editor.
 -->
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
         <title>Blog | Felix Lee</title>
-        <link type="text/css" rel=stylesheet href="site.css"/>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="boottest.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div id="main">
-            <div id="header">
-                <div id="nav-menu">
-                    <ul>
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                        <li><a href="about.html">About</a></li>
-                    </ul>
+        <div id="wrap">
+            
+            <!-- Fixed navbar -->
+            <div class="navbar navbar-inverse navbar-static-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.php">PROJECT NAME</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="blog.html">Blog</a></li>
+                            <li><a href="projects.html">Projects</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
                 </div>
             </div>
-            <div id="main-content">
-                <h1>Blogpost #1</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                    Donec cursus mollis orci, id aliquam tellus hendrerit vel. 
-                    Aenean consectetur erat a quam vulputate, a consequat mauris imperdiet. 
-                    Integer cursus mi vitae pulvinar euismod. 
-                    Interdum et malesuada fames ac ante ipsum primis in faucibus. 
-                    Vivamus rutrum, ex et lacinia lobortis, tellus enim sagittis orci, 
-                    a pharetra est dui vel mauris. 
-                    Proin ut dignissim augue. Integer ut molestie tellus. 
-                    Curabitur pellentesque erat sed commodo egestas. 
-                    Fusce porttitor magna et lacus maximus, in sagittis elit tincidunt. 
-                    Sed cursus lobortis sem et scelerisque.
-                </p>
-                <p>Suspendisse potenti. Nunc ultrices pretium velit et feugiat. 
-                   Fusce a risus tellus. Nam vel mauris nec eros iaculis vestibulum et at nisl. 
-                   Donec congue, orci ac tempus porttitor, justo neque lobortis tellus, 
-                   vulputate fringilla neque nibh in dolor. Donec lacus ex, interdum sed libero et, 
-                   commodo dictum mauris. Aenean dui velit, viverra et malesuada quis, cursus a augue. 
-                   Integer viverra blandit convallis. Nullam lacinia ex quam, at auctor ex bibendum eget. 
-                   Duis ultrices porttitor arcu sit amet tempor. Aliquam libero risus, 
-                   tempus eget ultrices euismod, faucibus sit amet purus. Aenean dolor ligula, 
-                   vehicula vitae imperdiet id, rutrum non nisl.
-                </p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                    Ut sollicitudin nec eros eu suscipit. Aenean viverra tincidunt lectus et rutrum. 
-                    Vivamus consequat, augue quis porttitor tempor, dolor augue fermentum purus, 
-                    nec maximus leo erat in augue. Etiam quam ex, mattis sit amet tincidunt non, 
-                    cursus vitae dolor. Duis ac placerat nisl. Donec commodo odio sed posuere eleifend.
-                </p>
+            
+            <!-- Begin page content -->
+            <div class="container">
+                <div class="page-header">
+                    <h1>Under construction...</h1>
+                </div>
+                <div class="page-content">
+                    <p>...</p>
+                </div>
             </div>
         </div>
+        
         <div id="footer">
-            <p>Copyright &copy Felix Lee 2015</p>
-        </div>    </body>
+            <div class="container">
+                <ul>
+                    <li><a class="facebook expand" href="#"></a></li>
+                    <li><a class="twitter expand" href="#"></a></li>                    
+                    <li><a class="github expand" href="#"></a></li>
+                </ul>
+                <p class="text-muted">&copy Felix Lee 2015</p>
+            </div>
+        </div>
+        
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+    </body>
 </html>
