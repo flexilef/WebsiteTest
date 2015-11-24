@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Contact | Felix Lee</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="boottest.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div id="wrap">
+      <!-- Fixed navbar -->
+      <div class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.php">PROJECT NAME</a>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="blog.html">Blog</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="about.html">About</a></li>
+              <li class="active"><a href="contact.html">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+
+      <!-- Begin page content -->
+      <div class="container">
+        <div class="page-header">
+          <h1>Contact Us!</h1>
+        </div>
+        <div class="page-content">
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label class="control-label col-md-1 col-md-offset-1" for="name">Name:</label>   
+              <div class="col-md-5">
+                <input type="text" class="form-control" name="name" id="name" autofocus required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-1 col-md-offset-1" for="email">Email:</label>
+              <div class="col-md-5">
+                <input type="text" class="form-control" name="email" id="email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-1 col-md-offset-1" for="subject">Subject:</label>
+              <div class="col-md-5">
+                <input type="text" class="form-control" name="subject" id="subject" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-10 col-md-offset-1">
+                <textarea class="form-control" name="message" rows="10" placeholder="Your message here..." required></textarea>
+                <br>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!--<div class="page-content contact-form">
+            <form role="form">
+                <label for="name">Name:</label>    
+                <input type="text" name="name" id="name" autofocus required>
+                <span class="red-star">&nbsp; *</span>
+                <br><br>
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email">
+                <br><br>
+                <label for="subject">Subject:</label>
+                <input type="text" name="subject" id="subject" required>
+                <span class="red-star">&nbsp; *</span>
+                <br><br>
+                <textarea name="message" rows="10" cols="100" placeholder="Your message here..." required></textarea>
+                <br><br>
+                <input type="submit">
+            </form>
+        </div>-->
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <ul>
+          <li><a class="facebook expand" href="#"></a></li>
+          <li><a class="twitter expand" href="#"></a></li>                    
+          <li><a class="github expand" href="#"></a></li>
+        </ul>
+        <p class="text-muted">&copy; Felix Lee 2015</p>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

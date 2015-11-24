@@ -31,75 +31,195 @@ body {
   background-color: black;
 }
 
-
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
-#wrap .nav {
-    float: right;
+/*Header code*/
+
+.no-vis {
+  visibility: hidden;
 }
 
-#wrap > .container .page-header {
-    //background-color: green;
-    text-align: center;
+/*Body code*/
+
+#wrap > .page-header {
+  //background-color: green;
+  text-align: center;
 }
-#wrap > .container .page-content {
-    //background-color: yellow;
+#wrap > .page-content {
+  //background-color: yellow;
+  margin: 25px;
+} 
+
+.page-content 
+.thumbnail {
+  position: relative;
+  background-color: green;
+  width: 100%;
+  height: 240px;
 }
 
-#footer > .container{
-    padding-left: 15px;
-    padding-right: 15px;
+.page-content 
+.thumbnail.dark {
+  background-color: black;
+}
+
+.page-content .thumbnail:hover,
+.page-content .thumbnail:focus,
+.page-content .thumbnail.active {
+  border-color: #337ab7;
+}
+
+.page-content 
+.thumbnail >
+a {
+  display: inline-block;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.page-content 
+.thumbnail >
+a {
+  text-decoration: none;
+}
+
+.page-content 
+a:hover >
+.hover-darken 
+.no-vis {
+  visibility: visible;
+}
+
+.page-content 
+a:hover >
+.hover-darken 
+h1, p {
+  margin: 0;
+  padding: 10px;
+  
+}
+
+.page-content 
+.thumbnail >
+a:hover >
+.hover-darken {
+  background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5));
+  width: 100%;
+  height: 100%;  
+  color: white;
+}
+
+.page-content 
+a.projectA {
+  background-image: url("http://goo.gl/3SCrr7");
+}
+
+.page-content 
+a.projectB {
+  background-image: url("http://goo.gl/1Ov4AA");
+}
+
+.page-content 
+a.projectC {
+  background-image: url("http://goo.gl/xa0Qie");
+}
+/*
+.page-content a.thumbnail.darken {
+  display: inline-block;
+  background-color: black;
+}
+
+.page-content a.thumbnail.darken:hover img {
+  opacity: .3;
+  transition: opacity .2s linear;
+}
+
+a.thumbnail.darken span {
+  display: none;
+}
+
+a.thumbnail.darken:hover span.img-hover-desc {
+  //background-color: green;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 50px;
+  left: 0;
+  color: white;
+  font-size: 100%;
+  line-height:100%;
+  padding: 20px;
+  width: 100%;
+}
+
+a.thumbnail.darken:hover span.img-desc-header {
+  display: block;
+  font-size: 150%;
+  margin: 10px 0 10px 0;
+}
+*/
+
+/*Footer code*/
+
+#footer > .container {
+  //background-color: green;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 #footer > .container p {
-    //background-color: pink;
-    text-align: center;
-    margin: 0;
+  //background-color: pink;
+  text-align: center;
+  margin: 0;
+  padding: 0;
 }
 
 #footer > .container ul {  
-    //background-color: blue;
-    list-style-type: none;
-    margin: 20px;
-    padding: 0;
-    text-align: center;
+  //background-color: blue;
+  list-style-type: none;
+  margin: 25px;
+  padding: 0;
+  text-align: center;
 }
 
 #footer > .container ul li {
-    //background-color: yellow;
-    display: inline;
-    margin: 20px;
+  //background-color: yellow;
+  display: inline-block;
+  margin: 0 16px 0 16px;
 }
 
 #footer li a {
-    display: inline-block;
-    border-radius: 100%;
-    width: 32px;
-    height: 32px;
-    text-decoration: none;
-    cursor: pointer;
-    background-size: 32px;
-    background-repeat: no-repeat;
-    background-position: center;
+  display: inline-block;
+  border-radius: 100%;
+  width: 32px;
+  height: 32px;
+  text-decoration: none;
+  cursor: pointer;
+  background-size: 32px;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all .2s ease-in-out;
 }
 
 #footer li a.facebook {
-    background-image: url(assets/facebook.png);
+  background-image: url(assets/facebook.png);
 }
 
 #footer li a.twitter {
-    background-image: url(assets/twitter.png);
+  background-image: url(assets/twitter.png);
 }
 
 #footer li a.github {
-    background-image: url(assets/github_alt.png);
+  background-image: url(assets/github_alt.png);
 }
 
 #footer li a:hover.expand {
-    background-size: 64px;
-    transition: background .2s ease-in-out;
+  background-size: 64px;
+  transition: background-size .2s ease-in-out;
 }
 
 code {
