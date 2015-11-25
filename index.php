@@ -15,9 +15,9 @@ and open the template in the editor.
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="boottest.css" rel="stylesheet" type="text/css">
   </head>
-  <body class="bgcover">
+  <body>
     <!-- Wrap all page content here -->
-    <div id="wrap">
+    <div id="wrap" class="bgcover">
 
       <!-- Fixed navbar -->
       <div class="navbar navbar-inverse navbar-static-top">
@@ -44,7 +44,6 @@ and open the template in the editor.
       <!-- Begin page content -->
       <div class="container">
         <div class="page-content">
-          <p>...</p>
         </div>
       </div>
     </div>

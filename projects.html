@@ -42,50 +42,72 @@ and open the template in the editor.
       <!-- Begin page content -->
       <div class="container">
         <div class="page-header">
-          <h1>Wall Of Projects</h1>
+          <h1>Wall of Projects</h1>
+          <ul class="nav nav-pills nav-divider">
+            <li role="presentation" class="active"><a href="#">All</a></li>
+            <li role="presentation"><a href="#">C++</a></li>
+            <li role="presentation"><a href="#">Java</a></li>
+          </ul>
         </div>
         <div class="page-content">
           <div class="row">
-            <div class="col-md-4">
-              <div class="thumbnail dark">
-                <a class="projectA" href="#">
-                  <div class="hover-darken">
-                    <h1 class="no-vis text-center">Project Name: A</h1>
-                    <p class="no-vis text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                      Suspendisse ipsum metus, pellentesque ut posuere id, maximus eget nunc.
-                    </p>
-                  </div>
-                </a></div></div>
-            <div class="col-md-4">
-              <div class="thumbnail dark">
-                <a class="projectB" href="#">
-                  <div class="hover-darken">
-                    <h1 class="no-vis text-center">Project-Name: B</h1>
-                    <p class="no-vis text-center">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                      Suspendisse ipsum metus, pellentesque ut posuere id, maximus eget nunc.
-                    </p>
-                  </div>
-                </a></div></div>
-            <div class="col-md-4">
-              <div class="thumbnail dark">
-                <a class="projectC" href="#">
-                  <div class="hover-darken">
-                    <h1 class="no-vis text-center">Project-Name: C</h1>
-                    <p class="no-vis text-center">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                      Suspendisse ipsum metus, pellentesque ut posuere id, maximus eget nunc.
-                    </p>
-                  </div>
-                </a></div></div>
-            <div class="text-center">
-              <button class="btn btn-xs btn-default" type="button">
-                <span class="glyphicon glyphicon-option-horizontal glyph-center"></span>
-              </button>
-            </div>
-          </div> <!-- End row -->
+            <ul id="proj-list" class="list-unstyled">
+              <li class="col-md-4">
+                <div class="thumbnail dark">
+                  <a class="projectA" href="#">
+                    <div class="hover-darken">
+                      <h1 class="no-vis text-center">Project Name: A</h1>
+                      <p class="no-vis text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Suspendisse ipsum metus, pellentesque ut posuere id, maximus eget nunc.
+                      </p>
+                    </div>
+                  </a></div>
+              </li>
+              <li class="col-md-4">
+                <div class="thumbnail dark">
+                  <a class="projectB" href="#">
+                    <div class="hover-darken">
+                      <h1 class="no-vis text-center">Project-Name: B</h1>
+                      <p class="no-vis text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Suspendisse ipsum metus, pellentesque ut posuere id, maximus eget nunc.
+                      </p>
+                    </div>
+                  </a></div>
+              </li>
+              <li class="col-md-4">
+                <div class="thumbnail dark">
+                  <a class="projectC" href="#">
+                    <div class="hover-darken">
+                      <h1 class="no-vis text-center">Project-Name: C</h1>
+                      <p class="no-vis text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Suspendisse ipsum metus, pellentesque ut posuere id, maximus eget nunc.
+                      </p>
+                    </div>
+                  </a></div>
+              </li>
+              <li class="col-md-4">
+                <div class="thumbnail dark">
+                  <a class="projectD" href="#">
+                    <div class="hover-darken">
+                      <h1 class="no-vis text-center">Project-Name: D</h1>
+                      <p class="no-vis text-center">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Suspendisse ipsum metus, pellentesque ut posuere id, maximus eget nunc.
+                      </p>
+                    </div>
+                  </a></div>
+              </li>
+            </ul>
+          </div>
+          <div class="text-center">
+            <button id="loadMore" class="btn btn-xs btn-default" type="button">
+              <span class="glyphicon glyphicon-option-horizontal glyph-center"></span>
+            </button>
+          </div>
         </div>
-      </div>  
+      </div>
     </div>
 
     <div id="footer">
@@ -103,5 +125,32 @@ and open the template in the editor.
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        max_size = $("#proj-list li").size();
+        display_count = 3;
+        load_count = 3;
+
+        $("#proj-list li:lt(" + display_count + ")").show();
+        
+        if (max_size > display_count)
+          $("#loadMore").show();
+        else
+          $("#loadMore").hide();
+        
+        $("#loadMore").click(function () {
+          if (display_count + load_count <= max_size)
+            display_count += load_count;
+          else
+            display_count = max_size;
+
+          $("#proj-list li:lt(" + display_count + ")").show();
+
+          if (display_count == max_size)
+            $("#loadMore").hide();
+        });
+      });
+    </script>
   </body>
 </html>
