@@ -15,7 +15,7 @@ and open the template in the editor.
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="boottest.css" rel="stylesheet" type="text/css">
   </head>
-  <body>
+  <body class="bgcover">
     <!-- Wrap all page content here -->
     <div id="wrap">
 
@@ -43,9 +43,6 @@ and open the template in the editor.
 
       <!-- Begin page content -->
       <div class="container">
-        <div class="page-header">
-          <h1>Under construction...</h1>
-        </div>
         <div class="page-content">
           <p>...</p>
         </div>
