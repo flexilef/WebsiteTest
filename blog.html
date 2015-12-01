@@ -5,29 +5,178 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <head>
-        <title>Blog | Felix Lee</title>
-        <link type="text/css" rel=stylesheet href="site.css"/>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div id="main">
-            <div id="header">
-                <div id="nav-menu">
-                    <ul>
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                        <li><a href="about.html">About</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div id="main-content">
-                <h1>Blog</h1>
-            </div>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Blog | Felix Lee</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="boottest.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div id="wrap">
+
+      <!-- Fixed navbar -->
+      <div class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.php">BLOG NAME</a>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="blog.html">Blog</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
         </div>
-        <div id="footer">
-            <p>Copyright &copy Felix Lee 2015</p>
-        </div>    </body>
+      </div>
+
+      <!-- Begin page content -->
+      <div class="container">
+        <div class="page-header">
+          <h1>[Blog Title] <small>[Blog Subtitle]</small></h1>
+          <p class="lead">[mm/dd/yyyy]</p>
+        </div>
+        <div class="page-content">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-1">
+              <div class="blog-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                  Praesent volutpat turpis tortor. Sed arcu ipsum, eleifend ac justo nec, 
+                  malesuada dictum sapien. Duis ut aliquet neque. Fusce et nunc ac 
+                  libero tempor facilisis. Mauris ornare ac erat sit amet commodo. 
+                  Donec in dui lorem. Maecenas posuere risus vel nulla placerat, ac tempus 
+                  turpis ornare. Nulla posuere ipsum vel turpis hendrerit, ut egestas 
+                  enim fringilla. Aliquam scelerisque accumsan metus varius vestibulum. 
+                  Etiam eget finibus elit, mollis sodales risus. Sed id quam gravida, 
+                  elementum augue quis, feugiat magna. Phasellus posuere magna auctor sem 
+                  scelerisque rutrum.
+                </p>
+                <img class="img-thumbnail dark" src="http://goo.gl/i5BMlO" alt="">
+                <p>Cras maximus orci sed enim facilisis rhoncus. Fusce nec eros ac libero 
+                  tempor suscipit in quis orci. Etiam blandit condimentum libero, eget 
+                  dignissim enim bibendum vel. Aliquam lorem eros, ullamcorper sit amet 
+                  maximus non, consectetur vitae odio. Sed vel venenatis sapien. Pellentesque 
+                  ornare leo ut lacus maximus pulvinar. Cras et rutrum tellus. Maecenas tincidunt, 
+                  dolor eget cursus congue, lectus ante interdum urna, non luctus turpis 
+                  metus ac diam. Vestibulum ac erat ac dui semper auctor eget et eros. 
+                  Suspendisse vel ipsum ac felis ultricies tincidunt vel a elit. Sed nec 
+                  volutpat tortor. In ut turpis et massa accumsan interdum. Praesent varius 
+                  congue eros, rhoncus tempus elit hendrerit eu. Sed vel est mauris.
+                </p>
+              </div>
+              <ul class="pager">
+                <li><a href="#">Previous</a></li>
+                <li><a href="#">Next</a></li>
+              </ul>
+            </div>
+            <div class="col-md-2 col-md-offset-1">
+              <div class="blog-side text-center">
+                <h4>Archives</h4>
+                <ol class="list-unstyled">
+                  <li>January <span class="badge">#</span></li>
+                  <li>February <span class="badge">#</span></li>
+                  <li>March <span class="badge">#</span></li>
+                  <li>April <span class="badge">#</span></li>
+                  <li>May <span class="badge">#</span></li>
+                  <li>June <span class="badge">#</span></li>
+                  <li>July <span class="badge">#</span></li>
+                  <li>August <span class="badge">#</span></li>
+                  <li>September <span class="badge">#</span></li>
+                  <li>November <span class="badge">#</span></li>
+                  <li>December <span class="badge">#</span></li>
+                </ol>
+              </div>
+            </div>
+          </div> <!-- End row -->
+          <div class="row">
+            <div class="col-md-8 col-md-offset-1">
+              <div id="disqus_loader">
+                <button class="btn btn-default show-comments" type="button"
+                        onclick='$.ajaxSetup({cache: true});
+			    $.getScript("http://flexilef.disqus.com/embed.js");
+			    $.ajaxSetup({cache: false});
+			    $("#disqus_loader").remove();'>
+                  Display Discussion
+                  <span class="glyphicon glyphicon-chevron-down glyph-center"></span>
+                </button>
+              </div>
+              <div id="disqus_thread"></div> <!--Insert this to open Disqus -->
+
+              <!-- without jquery
+              <div id="disqus_loader" style="text-align: center">
+                <button onclick="load_disqus()">Load Disqus Comments</button>
+                <script>
+                  function load_disqus()
+                  {
+                    var dsq = document.createElement('script');
+                    dsq.type = 'text/javascript';
+                    dsq.async = true;
+                    dsq.src = "http://[YOUR-DISQUS-SHORTNAME].disqus.com/embed.js";
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                    var ldr = document.getElementById('disqus_loader');
+                    ldr.parentNode.removeChild(ldr);
+                  }
+                </script>-->
+            </div>
+
+            <script>
+	      /**
+	       * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+	       * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+	       */
+	      /*
+	       var disqus_config = function () {
+	       this.page.url = "http://52.8.135.18/~fchanlee"; // Replace PAGE_URL with your page's canonical URL variable
+	       this.page.identifier = "123"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	       };
+	       
+	       (function () { // DON'T EDIT BELOW THIS LINE
+	       var d = document, s = d.createElement('script');
+	       
+	       s.src = '//flexilef.disqus.com/embed.js';
+	       
+	       s.setAttribute('data-timestamp', +new Date());
+	       (d.head || d.body).appendChild(s);
+	       })();*/
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+          </div>
+        </div>
+        <!--<div class="row blog-nav">
+          <div class="col-md-1 col-md-offset-4">
+            <a class="btn btn-default" href="#">Previous</a>
+          </div>
+          <div class="col-md-1 col-md-offset-0">
+            <a class="btn btn-default" href="#">Next</a>
+          </div>
+        </div>
+        -->
+      </div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <ul class="list-inline list-unstyled">
+	  <li><a class="facebook expand" href="#"></a></li>
+	  <li><a class="twitter expand" href="#"></a></li>                    
+	  <li><a class="github expand" href="#"></a></li>
+	</ul>
+        <p class="text-muted">Copyright &copy 2015 Felix Lee </p>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 </html>
