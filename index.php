@@ -20,7 +20,9 @@ and open the template in the editor.
     <div id="wrap" class="bgcover">
 
       <!-- Fixed navbar -->
+
       <div class="navbar navbar-inverse navbar-static-top transparent">
+
         <div class="container">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -28,7 +30,9 @@ and open the template in the editor.
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
+
             <a class="navbar-brand" href="index.php">BLOG NAME</a>
+
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -44,6 +48,7 @@ and open the template in the editor.
       <!-- Begin page content -->
       <div class="container">
         <div class="page-content">
+
 	  <div class="jumbotron">
 	    <h3 class=" text-center">Featured Post by [AUTHOR]</h3>
 	    <h2 class=" text-center">[POST TITLE] <small>[SUBTITLE]</small>
@@ -72,6 +77,7 @@ and open the template in the editor.
 	  <li><a class="github expand" href="#"></a></li>
 	</ul>
 	<p class="text-muted">Copyright &copy 2015 Felix Lee </p>
+	
       </div>
     </div>
 
