@@ -12,7 +12,7 @@ and open the template in the editor.
 
     <title>Projects | Felix Lee</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="boottest.css" rel="stylesheet" type="text/css">
+    <link href="site.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <div id="wrap">
@@ -26,9 +26,7 @@ and open the template in the editor.
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-			
             <a class="navbar-brand" href="index.php">BLOG NAME</a>
-
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -114,20 +112,12 @@ and open the template in the editor.
 
     <div id="footer">
       <div class="container">
-<<<<<<< HEAD
         <ul class="list-inline list-unstyled">
-=======
-        <ul>
->>>>>>> 79bfb9d67a0892e8c83865da3db696be00f3f23c
           <li><a class="facebook expand" href="#"></a></li>
           <li><a class="twitter expand" href="#"></a></li>                    
           <li><a class="github expand" href="#"></a></li>
         </ul>
-<<<<<<< HEAD
         <p class="text-muted">Copyright &copy 2015 Felix Lee </p>
-=======
-        <p class="text-muted">&copy Felix Lee 2015</p>
->>>>>>> 79bfb9d67a0892e8c83865da3db696be00f3f23c
       </div>
     </div>
 
@@ -135,32 +125,6 @@ and open the template in the editor.
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-
-    <script>
-      $(document).ready(function () {
-        max_size = $("#proj-list li").size();
-        display_count = 3;
-        load_count = 3;
-
-        $("#proj-list li:lt(" + display_count + ")").show();
-        
-        if (max_size > display_count)
-          $("#loadMore").show();
-        else
-          $("#loadMore").hide();
-        
-        $("#loadMore").click(function () {
-          if (display_count + load_count <= max_size)
-            display_count += load_count;
-          else
-            display_count = max_size;
-
-          $("#proj-list li:lt(" + display_count + ")").show();
-
-          if (display_count == max_size)
-            $("#loadMore").hide();
-        });
-      });
-    </script>
+    <script type="text/javascript" src="site.js"></script>
   </body>
 </html>

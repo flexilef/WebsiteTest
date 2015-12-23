@@ -13,16 +13,14 @@ and open the template in the editor.
 
     <title>Home | Felix Lee</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="boottest.css" rel="stylesheet" type="text/css">
+    <link href="site.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <!-- Wrap all page content here -->
     <div id="wrap" class="bgcover">
 
       <!-- Fixed navbar -->
-
       <div class="navbar navbar-inverse navbar-static-top transparent">
-
         <div class="container">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -30,9 +28,7 @@ and open the template in the editor.
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-
             <a class="navbar-brand" href="index.php">BLOG NAME</a>
-
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -48,13 +44,12 @@ and open the template in the editor.
       <!-- Begin page content -->
       <div class="container">
         <div class="page-content">
-
 	  <div class="jumbotron">
-	    <h3 class=" text-center">Featured Post by [AUTHOR]</h3>
-	    <h2 class=" text-center">[POST TITLE] <small>[SUBTITLE]</small>
+	    <h3 class="text-center">Featured Post by <span class="light-emphasis">[AUTHOR]</span></h3>
+	    <h2 class="text-center">[POST TITLE] <small>[SUBTITLE]</small>
 	      <br><small>[mm/dd/yyyy]</small>
 	    </h2>
-	    <h4 class=" text-center">
+	    <h4 class="text-center">
 	      Excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 	      Praesent volutpat turpis tortor. Sed arcu ipsum, eleifend ac justo nec, 
 	      malesuada dictum sapien. Duis ut aliquet neque. Fusce et nunc ac 
@@ -77,7 +72,6 @@ and open the template in the editor.
 	  <li><a class="github expand" href="#"></a></li>
 	</ul>
 	<p class="text-muted">Copyright &copy 2015 Felix Lee </p>
-	
       </div>
     </div>
 
