@@ -56,4 +56,42 @@ function getLatestBlogpost()
 	
 	return $post;
 }
+
+function getLatestBlogpostID() {
+	$db = new Database();
+	
+	$query = "SELECT id FROM blog_posts ORDER BY id DESC LIMIT 1";
+	$row = $db->select($query);
+	
+	return $row[0]['id'];
+}
+
+function getEarliestBlogpostID() {
+	$db = new Database();
+	
+	$query = "SELECT id FROM blog_posts ORDER BY id LIMIT 1";
+	$row = $db->select($query);
+	
+	return $row[0]['id'];
+}
+
+function getPreviousPostID($postID) {
+	
+	$db = new Database();
+
+	$query = "SELECT id FROM blog_posts WHERE id < $postID ORDER BY id DESC Limit 1";
+	$row = $db->select($query);
+	
+	return $row[0]['id'];
+}
+
+function getNextPostID($postID) {
+
+	$db = new Database();
+
+	$query = "SELECT id FROM blog_posts WHERE id > $postID ORDER BY id Limit 1";
+	$row = $db->select($query);
+	
+	return $row[0]['id'];
+}
 ?>

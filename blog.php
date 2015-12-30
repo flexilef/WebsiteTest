@@ -7,7 +7,25 @@ and open the template in the editor.
 <?php
 	include 'include.php';
 	
-	$blogpost = getLatestBlogpost();
+	if(isset($_GET['id']) && !empty($_GET['id'])) {
+		$curPostID = $_GET['id'];
+		
+		$row = getBlogposts($curPostID);
+		$blogpost = $row[0];
+	}
+	else {
+		$blogpost = getLatestBlogpost();
+		$curPostID = $blogpost->id;
+	}
+	
+	$earliestPostID = getEarliestBlogpostID();
+	$latestPostID = getLatestBlogpostID();
+
+	($curPostID > $earliestPostID) ? $prevPostID = getPreviousPostID($curPostID) : 	
+		$prevPostID = $earliestPostID;
+
+	($curPostID < $latestPostID) ? $nextPostID = getNextPostID($curPostID) :
+		$nextPostID = $latestPostID;
 ?>
 
 <html>
@@ -56,11 +74,17 @@ and open the template in the editor.
             <div class="col-md-8 col-md-offset-1">
               <div class="blog-content">
 								<p>
-									<?php echo $blogpost->post;?>
+									<?php echo $blogpost->post . " postID: " . $curPostID ;?>
               </div>
               <ul class="pager">
-                <li><a href="#">Previous</a></li>
-                <li><a href="#">Next</a></li>
+								<?php
+									if($curPostID != $earliestPostID) : ?>
+                <li><?php echo '<a href="blog.php?id=' . $prevPostID . '">';?>Previous</a></li>
+								<?php endif; ?>
+								<?php 
+									if($curPostID != $latestPostID) : ?>
+                <li><?php echo '<a href="blog.php?id=' . $nextPostID . '">';?>Next</a></li>
+								<?php endif; ?>
               </ul>
             </div>
             <div class="col-md-2 col-md-offset-1">

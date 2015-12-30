@@ -19,7 +19,7 @@ class BlogPost
 	{
 		$db = new Database();
 
-		if(!empty($inID))
+		if(!empty($inId))
 		{
 			$this->id = $inId;
 		} 
