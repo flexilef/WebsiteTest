@@ -14,14 +14,14 @@ class BlogPost
 	
 	private $connection;
 
-	function __construct($inId=null, $inTitle=null, $inSubtitle=null, $inPost=null,
-						$inAuthorId=null, $inDatePosted=null)
+	function __construct($inID=null, $inTitle=null, $inSubtitle=null, $inPost=null,
+						$inAuthorID=null, $inDatePosted=null)
 	{
 		$db = new Database();
 
-		if(!empty($inId))
+		if(!empty($inID))
 		{
-			$this->id = $inId;
+			$this->id = $inID;
 		} 
   
 		if(!empty($inTitle))
@@ -39,11 +39,12 @@ class BlogPost
 			$this->post = $inPost;
 		}
 
-		if(!empty($inAuthorId))
+		if(!empty($inAuthorID))
 		{			
-			$query = "SELECT first_name, last_name FROM people WHERE id = " . $inAuthorId;
+			$query = "SELECT first_name, last_name FROM people WHERE id = ?";
 			
-			$row = $db->select($query);
+			$params = array($inAuthorID);
+			$row = $db->select($query, $params);
 			
 			//$row[0][] because we know we only return one row (unique author id)
 			$this->author = $row[0]['first_name'] . " " . $row[0]['last_name'];
@@ -54,7 +55,8 @@ class BlogPost
 			$splitDate = explode("-", $inDatePosted);
 			$this->datePosted = $splitDate[1] . "/" . $splitDate[2] . "/" . $splitDate[0];
 		}
-
+		
+		//fix the following to use prepared statements
 		$postTags = "No Tags";
 		if(!empty($inId))
 		{ 

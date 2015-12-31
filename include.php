@@ -2,29 +2,34 @@
 
 include 'blogpost.php';
 
-function getBlogposts($inId=null, $inTagId=null) 
+function getBlogposts($inID=null, $inTagID=null) 
 {
 	$db = new database();
 
-  if(!empty($inId)) 
+  if(!empty($inID)) 
 	{
-    $query = "SELECT * FROM blog_posts WHERE id = " . $inId . " ORDER BY id DESC"; 
+    $query = "SELECT * FROM blog_posts WHERE id = ? ORDER BY id DESC"; 
+		
+		$params = array($inID);
+		$rows = $db->select($query, $params);
   }
-  else if(!empty($inTagId)) 
+  else if(!empty($inTagID)) 
 	{
-    $query = "SELECT blog_posts.* FROM blog_post_tags LEFT JOIN (blog_posts) ON (blog_post_tags.postID = blog_posts.id) WHERE blog_post_tags.tagID =" . $tagID . " ORDER BY blog_posts.id DESC";
+    $query = "SELECT blog_posts.* FROM blog_post_tags LEFT JOIN (blog_posts) ON (blog_post_tags.postID = blog_posts.id) WHERE blog_post_tags.tagID = ? ORDER BY blog_posts.id DESC";
+		
+		$params = array($tagID);
+		$rows = $db->select($query, $params);
   }
   else 
 	{
 		$query = "SELECT * FROM blog_posts ORDER BY id DESC";
+		$rows = $db->select($query);
   }
 	
-	$rows = $db->select($query);
 	$postArray = array();
 	
 	if(!$rows) {
 		echo '0 results ';
-		echo 'Invalid query: ' . mysql_error() . "\n";
 		echo 'Whole query: ' . $query; 
 		}
 	else {

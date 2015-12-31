@@ -9,6 +9,7 @@ class Database {
 	private $dbname;
 	
 	public function connect() {
+			
 		if(!isset(self::$connection)) {
 			$config = parse_ini_file('../config.ini');
 			
@@ -17,51 +18,34 @@ class Database {
 			$password = $config['password'];
 			$dbname = $config['dbname'];
 			
-			self::$connection = new mysqli($host, $username, $password, $dbname);
+			$dsn = "mysql:host=localhost;dbname=" . $dbname . ";charset=utf8";
+			$opt = array (
+				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+				PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+				);
+				
+			
+			self::$connection = new PDO($dsn, $username, $password, $opt);
 		}
 		
-		if(self::$connection === false)
-		{
-		  echo "Connection failed: " . $conn->connect_error;
-			return false;
-		}
-			
 		return self::$connection;
 	}
 	
-	public function query($query) {
+	//$params is an array of bounded values to the prepared query
+	public function select($query, $params=null) {
+	
 		$connection = $this->connect();
 		
-		$result = $connection->query($query);
+		$stmt = $connection->prepare($query);
+		
+		if($params == null)
+			$stmt->execute();
+		else
+			$stmt->execute(func_get_arg(1));
+		
+		$result = $stmt->fetchAll();
 		
 		return $result;
-	}
-	
-	public function select($query) {
-		$rows = array();
-		$result = $this->query($query);
-		
-		if($result === false) {
-			return false;
-		}
-		
-		while($row = $result->fetch_assoc()) {
-			$rows[] = $row;
-		}
-	
-		return $rows;
-	}
-
-	public function error() {
-		$connection = $this->connect();
-		
-		return $connection->error();
-	}
-	
-	public function quote($value) {
-		$connection = $this->connect();
-		
-		return "'" . $connection->real_escape_string($value) . ".";
 	}
 }
 ?>
