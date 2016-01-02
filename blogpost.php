@@ -6,6 +6,7 @@ class BlogPost
 {
   public $id;
   public $title;
+	public $titleSlug;
 	public $subtitle;
   public $post;
   public $author;
@@ -14,7 +15,7 @@ class BlogPost
 	
 	private $connection;
 
-	function __construct($inID=null, $inTitle=null, $inSubtitle=null, $inPost=null,
+	function __construct($inID=null, $inTitle=null, $inSlug=null, $inSubtitle=null, $inPost=null,
 						$inAuthorID=null, $inDatePosted=null)
 	{
 		$db = new Database();
@@ -27,6 +28,11 @@ class BlogPost
 		if(!empty($inTitle))
 		{ 
 			$this->title = $inTitle;
+		}
+		  
+		if(!empty($inSlug))
+		{ 
+			$this->titleSlug = $inSlug;
 		}
 		
 		if(!empty($inSubtitle))

@@ -5,6 +5,14 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
+<?php
+
+include 'include.php';
+
+$latestPost = getLatestBlogpost();
+$latestPostSlug = $latestPost->titleSlug;
+?>
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -32,7 +40,8 @@ and open the template in the editor.
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="blog.html">Blog</a></li>
+              <!--<li><?php echo '<a href=' . $latestPostSlug . '>';?>Blog</a></li>-->
+							<li><a href="/blog.php">Blog</a></li>
               <li><a href="projects.html">Projects</a></li>
               <li><a href="about.html">About</a></li>
               <li><a href="contact.html">Contact</a></li>

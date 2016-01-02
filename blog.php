@@ -8,10 +8,12 @@ and open the template in the editor.
 	include 'include.php';
 	
 	if(isset($_GET['id']) && !empty($_GET['id'])) {
-		$curPostID = $_GET['id'];
 		
-		$row = getBlogposts($curPostID);
-		$blogpost = $row[0];
+		$curPostSlug = $_GET['id'];
+		
+		$blogpost = getBlogpostFromSlug($curPostSlug);		
+		$curPostID = $blogpost->id;
+		var_dump($curPostSlug);
 	}
 	else {
 		$blogpost = getLatestBlogpost();
@@ -26,6 +28,13 @@ and open the template in the editor.
 
 	($curPostID < $latestPostID) ? $nextPostID = getNextPostID($curPostID) :
 		$nextPostID = $latestPostID;
+	
+	$row = getBlogposts($prevPostID);
+	$prevPostSlug = $row[0]->titleSlug;
+	
+	$row = getBlogposts($nextPostID);
+	$nextPostSlug = $row[0]->titleSlug;
+	
 ?>
 
 <html>
@@ -35,8 +44,8 @@ and open the template in the editor.
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Blog | Felix Lee</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="site.css" rel="stylesheet" type="text/css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/site.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <div id="wrap">
@@ -54,10 +63,10 @@ and open the template in the editor.
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="blog.html">Blog</a></li>
-              <li><a href="projects.html">Projects</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="contact.html">Contact</a></li>
+              <li class="active"><a href="/blog.php">Blog</a></li>
+              <li><a href="/projects.html">Projects</a></li>
+              <li><a href="/about.html">About</a></li>
+              <li><a href="/contact.html">Contact</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -79,11 +88,11 @@ and open the template in the editor.
               <ul class="pager">
 								<?php
 									if($curPostID != $earliestPostID) : ?>
-                <li><?php echo '<a href="blog.php?id=' . $prevPostID . '">';?>Previous</a></li>
+                <li><?php echo '<a href=/' . $prevPostSlug . '>';?>Previous</a></li>
 								<?php endif; ?>
 								<?php 
 									if($curPostID != $latestPostID) : ?>
-                <li><?php echo '<a href="blog.php?id=' . $nextPostID . '">';?>Next</a></li>
+                <li><?php echo '<a href=/' . $nextPostSlug . '>';?>Next</a></li>
 								<?php endif; ?>
               </ul>
             </div>
