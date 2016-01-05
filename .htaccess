@@ -1,0 +1,12 @@
+
+#	Enable Rewriting
+RewriteEngine on
+
+#if a request is made that is not a directory and not a file
+#then pass the request to blog.php as a parameter to id (?id=$1)
+
+RewriteCond %{REQUEST_FILENAME} !-d [NC]
+RewriteCond %{REQUEST_FILENAME} !-f [NC]
+
+RewriteRule ^blog$ blog.php
+RewriteRule ^blog/(\d)/?(.*)$ viewpost.php?id=$1

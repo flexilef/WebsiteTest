@@ -4,6 +4,38 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<?php
+	include 'functions.php';
+	
+	if(isset($_GET['id']) && !empty($_GET['id'])) {
+		
+		$curPostID = $_GET['id'];
+		
+		//add checks if getBlogPost does not return a blogpost, then redirect to 404
+		//http://stackoverflow.com/questions/6189169/redirect-to-404-page-or-display-404-message
+		$row = getBlogPosts($curPostID);
+		$blogpost = $row[0];
+	}
+	else {
+		//TODO: instead of displaying the latest post, change to display a 
+		//list of all the posts with short descriptions and pagination
+		$blogpost = getLatestBlogpost();
+		$curPostID = $blogpost->getID();
+	}
+	
+	$earliestPostID = getEarliestBlogpostID();
+	$latestPostID = getLatestBlogpostID();
+
+	$prevPostID = getPreviousPostID($curPostID);
+	$nextPostID = getNextPostID($curPostID);
+	
+	$row = getBlogposts($prevPostID);
+	$prevPostSlug = $row[0]->getTitleSlug();
+	
+	$row = getBlogposts($nextPostID);
+	$nextPostSlug = $row[0]->getTitleSlug();
+?>
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -11,8 +43,8 @@ and open the template in the editor.
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Blog | Felix Lee</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="site.css" rel="stylesheet" type="text/css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/site.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <div id="wrap">
@@ -26,14 +58,14 @@ and open the template in the editor.
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">BLOG NAME</a>
+            <a class="navbar-brand" href="/test">BleepingBugs</a>
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="blog.html">Blog</a></li>
-              <li><a href="projects.html">Projects</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="contact.html">Contact</a></li>
+              <li class="active"><a href="/test/blog">Blog</a></li>
+              <li><a href="/test/projects.html">Projects</a></li>
+              <li><a href="/test/about.html">About</a></li>
+              <li><a href="/test/contact.html">Contact</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -42,40 +74,25 @@ and open the template in the editor.
       <!-- Begin page content -->
       <div class="container">
         <div class="page-header">
-          <h1>[Blog Title] <small>[Blog Subtitle]</small></h1>
-          <p class="lead">[mm/dd/yyyy]</p>
+          <h1><?php echo $blogpost->getTitle()?> <small><?php echo $blogpost->getSubtitle()?></small></h1>
+          <p class="lead">Written by <?php echo $blogpost->getAuthor() . " on "?><small><?php echo $blogpost->getDatePosted()?></small></p>
         </div>
         <div class="page-content">
           <div class="row">
             <div class="col-md-8 col-md-offset-1">
               <div class="blog-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                  Praesent volutpat turpis tortor. Sed arcu ipsum, eleifend ac justo nec, 
-                  malesuada dictum sapien. Duis ut aliquet neque. Fusce et nunc ac 
-                  libero tempor facilisis. Mauris ornare ac erat sit amet commodo. 
-                  Donec in dui lorem. Maecenas posuere risus vel nulla placerat, ac tempus 
-                  turpis ornare. Nulla posuere ipsum vel turpis hendrerit, ut egestas 
-                  enim fringilla. Aliquam scelerisque accumsan metus varius vestibulum. 
-                  Etiam eget finibus elit, mollis sodales risus. Sed id quam gravida, 
-                  elementum augue quis, feugiat magna. Phasellus posuere magna auctor sem 
-                  scelerisque rutrum.
-                </p>
-                <img class="img-thumbnail dark" src="http://goo.gl/i5BMlO" alt="">
-                <p>Cras maximus orci sed enim facilisis rhoncus. Fusce nec eros ac libero 
-                  tempor suscipit in quis orci. Etiam blandit condimentum libero, eget 
-                  dignissim enim bibendum vel. Aliquam lorem eros, ullamcorper sit amet 
-                  maximus non, consectetur vitae odio. Sed vel venenatis sapien. Pellentesque 
-                  ornare leo ut lacus maximus pulvinar. Cras et rutrum tellus. Maecenas tincidunt, 
-                  dolor eget cursus congue, lectus ante interdum urna, non luctus turpis 
-                  metus ac diam. Vestibulum ac erat ac dui semper auctor eget et eros. 
-                  Suspendisse vel ipsum ac felis ultricies tincidunt vel a elit. Sed nec 
-                  volutpat tortor. In ut turpis et massa accumsan interdum. Praesent varius 
-                  congue eros, rhoncus tempus elit hendrerit eu. Sed vel est mauris.
-                </p>
+								<p>
+									<?php echo $blogpost->getPost() . " postID: " . $curPostID ;?>
               </div>
               <ul class="pager">
-                <li><a href="#">Previous</a></li>
-                <li><a href="#">Next</a></li>
+								<?php
+									if($curPostID != $earliestPostID) : ?>
+                <li><?php echo '<a href=/test/blog/' . $prevPostID . "/" . $prevPostSlug . '>';?>Previous</a></li>
+								<?php endif; ?>
+								<?php 
+									if($curPostID != $latestPostID) : ?>
+                <li><?php echo '<a href=/test/blog/' . $nextPostID . "/" . $nextPostSlug . '>';?>Next</a></li>
+								<?php endif; ?>
               </ul>
             </div>
             <div class="col-md-2 col-md-offset-1">

@@ -7,10 +7,11 @@ and open the template in the editor.
 
 <?php
 
-include 'include.php';
+include 'functions.php';
 
 $latestPost = getLatestBlogpost();
-$latestPostSlug = $latestPost->titleSlug;
+$latestPostID = $latestPost->getID();
+$latestPostSlug = $latestPost->getTitleSlug();
 ?>
 
 <html>
@@ -19,7 +20,7 @@ $latestPostSlug = $latestPost->titleSlug;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Home | Felix Lee</title>
+    <title>Home | BleepingBugs</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="site.css" rel="stylesheet" type="text/css">
   </head>
@@ -36,15 +37,14 @@ $latestPostSlug = $latestPost->titleSlug;
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">BLOG NAME</a>
+            <a class="navbar-brand" href="/test">BleepingBugs</a>
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-              <!--<li><?php echo '<a href=' . $latestPostSlug . '>';?>Blog</a></li>-->
-							<li><a href="/blog.php">Blog</a></li>
-              <li><a href="projects.html">Projects</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="contact.html">Contact</a></li>
+							<li><a href="/test/blog">Blog</a></li>
+              <li><a href="/test/projects.html">Projects</a></li>
+              <li><a href="/test/about.html">About</a></li>
+              <li><a href="/test/contact.html">Contact</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -66,7 +66,7 @@ $latestPostSlug = $latestPost->titleSlug;
 	      Donec in dui lorem."
 	    </h4>
 	    <div class="text-center">
-	      <a class="btn btn-primary " href="blog.html">Read More</a>
+	      <a class="btn btn-primary " href="<?php echo "/test/blog/" . $latestPostID . "/" . $latestPostSlug;?>">Read More</a>
 	    </div>
 	  </div>
 	</div>

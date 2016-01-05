@@ -4,14 +4,14 @@ include 'database.php';
 
 class BlogPost 
 {
-  public $id;
-  public $title;
-	public $titleSlug;
-	public $subtitle;
-  public $post;
-  public $author;
-  public $tags;
-  public $datePosted;
+  private $id;
+  private $title;
+	private $titleSlug;
+	private $subtitle;
+  private $post;
+  private $author;
+  private $tags;
+  private $datePosted;
 	
 	private $connection;
 
@@ -101,6 +101,38 @@ class BlogPost
 			}
 			$this->tags = $postTags;
 		}
+	}
+	
+	function getID() {
+		return $this->id;
+	}
+	
+	function getTitle() {
+		return $this->title;
+	}
+	
+	function getTitleSlug() {
+		return $this->titleSlug;
+	}
+	
+	function getSubtitle() {
+		return $this->subtitle;
+	}
+	
+	function getPost() {
+		return $this->post;
+	}
+	
+	function getAuthor() {
+		return $this->author;
+	}
+	
+	function getTags() {
+		return $this->tags;
+	}
+	
+	function getDatePosted() {
+		return $this->datePosted;
 	}
 }
 

@@ -83,35 +83,52 @@ function getEarliestBlogpostID() {
 function getPreviousPostID($postID) {
 	
 	$db = new Database();
-
-	$query = "SELECT id FROM blog_posts WHERE id < $postID ORDER BY id DESC LIMIT 1";
-	$row = $db->select($query);
+	$earliestPostID = getEarliestBlogpostID();
 	
-	return $row[0]['id'];
+	if(!empty($postID) && ($postID > $earliestPostID))
+	{
+		$query = "SELECT id FROM blog_posts WHERE id < $postID ORDER BY id DESC LIMIT 1";
+		$row = $db->select($query);
+		
+		return $row[0]['id'];
+	}
+	
+	return null;
 }
 
 function getNextPostID($postID) {
 
 	$db = new Database();
+	$latestPostID = getLatestBlogpostID();
 
-	$query = "SELECT id FROM blog_posts WHERE id > $postID ORDER BY id LIMIT 1";
-	$row = $db->select($query);
+	if(!empty($postID) && ($postID < $latestPostID))
+	{
+		$query = "SELECT id FROM blog_posts WHERE id > $postID ORDER BY id LIMIT 1";
+		$row = $db->select($query);
+		
+		return $row[0]['id'];
+	}
 	
-	return $row[0]['id'];
+	return null;
 }
 
 function getBlogpostFromSlug($inSlug) {
 	$db = new Database();
 	
-	$query = 'SELECT * FROM blog_posts WHERE title_slug=?';
+	if(!empty($inSlug))
+	{
+		$query = 'SELECT * FROM blog_posts WHERE title_slug=?';
+		
+		$params = array($inSlug);
+		$row = $db->select($query, $params);
 	
-	$params = array($inSlug);
-	$row = $db->select($query, $params);
+		$post = new BlogPost($row[0]['id'], $row[0]['title'], $row[0]['title_slug'], $row[0]['subtitle'], 
+												$row[0]['post'], $row[0]['author_id'], $row[0]['date_posted']);
+		
+		return $post;
+	}
 	
-	$post = new BlogPost($row[0]['id'], $row[0]['title'], $row[0]['title_slug'], $row[0]['subtitle'], 
-											$row[0]['post'], $row[0]['author_id'], $row[0]['date_posted']);
-	
-	return $post;
+	return null;
 }
 
 function slug($text){ 

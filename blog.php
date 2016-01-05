@@ -5,36 +5,9 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
-	include 'include.php';
+	include 'functions.php';
 	
-	if(isset($_GET['id']) && !empty($_GET['id'])) {
-		
-		$curPostSlug = $_GET['id'];
-		
-		$blogpost = getBlogpostFromSlug($curPostSlug);		
-		$curPostID = $blogpost->id;
-		var_dump($curPostSlug);
-	}
-	else {
-		$blogpost = getLatestBlogpost();
-		$curPostID = $blogpost->id;
-	}
-	
-	$earliestPostID = getEarliestBlogpostID();
-	$latestPostID = getLatestBlogpostID();
-
-	($curPostID > $earliestPostID) ? $prevPostID = getPreviousPostID($curPostID) : 	
-		$prevPostID = $earliestPostID;
-
-	($curPostID < $latestPostID) ? $nextPostID = getNextPostID($curPostID) :
-		$nextPostID = $latestPostID;
-	
-	$row = getBlogposts($prevPostID);
-	$prevPostSlug = $row[0]->titleSlug;
-	
-	$row = getBlogposts($nextPostID);
-	$nextPostSlug = $row[0]->titleSlug;
-	
+	$blogposts = getBlogposts();
 ?>
 
 <html>
@@ -59,14 +32,14 @@ and open the template in the editor.
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">BLOG NAME</a>
+            <a class="navbar-brand" href="/">BLOG NAME</a>
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="/blog.php">Blog</a></li>
-              <li><a href="/projects.html">Projects</a></li>
-              <li><a href="/about.html">About</a></li>
-              <li><a href="/contact.html">Contact</a></li>
+              <li class="active"><a href="/test/blog">Blog</a></li>
+              <li><a href="/test/projects.html">Projects</a></li>
+              <li><a href="/test/about.html">About</a></li>
+              <li><a href="/test/contact.html">Contact</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -75,26 +48,21 @@ and open the template in the editor.
       <!-- Begin page content -->
       <div class="container">
         <div class="page-header">
-          <h1><?php echo $blogpost->title?> <small><?php echo $blogpost->subtitle?></small></h1>
-          <p class="lead">Written by <?php echo $blogpost->author . " on "?><small><?php echo $blogpost->datePosted?></small></p>
+					<h1>List of Blogposts</hi>
         </div>
         <div class="page-content">
           <div class="row">
             <div class="col-md-8 col-md-offset-1">
-              <div class="blog-content">
-								<p>
-									<?php echo $blogpost->post . " postID: " . $curPostID ;?>
+             <div class="blog-content">
+								<?php foreach($blogposts as $post) : ?>
+									<p><?php echo $post->getTitle(); ?></p>
+									<p><?php echo $post->getSubtitle(); ?></p>
+									<p><?php echo $post->getPost(); ?> </p>
+									<p><a class="btn btn-primary " href="<?php echo "/test/blog/" . $post->getID() . "/" . 
+									$post->getTitleSlug(); ?>">Read More</a></p>
+									<hr>
+								<?php endforeach; ?>
               </div>
-              <ul class="pager">
-								<?php
-									if($curPostID != $earliestPostID) : ?>
-                <li><?php echo '<a href=/' . $prevPostSlug . '>';?>Previous</a></li>
-								<?php endif; ?>
-								<?php 
-									if($curPostID != $latestPostID) : ?>
-                <li><?php echo '<a href=/' . $nextPostSlug . '>';?>Next</a></li>
-								<?php endif; ?>
-              </ul>
             </div>
             <div class="col-md-2 col-md-offset-1">
               <div class="blog-side text-center">
@@ -115,34 +83,17 @@ and open the template in the editor.
               </div>
             </div>
           </div> <!-- End row -->
-          <div class="row">
-            <div class="col-md-8 col-md-offset-1">
-              <div id="disqus_loader">
-                <button class="btn btn-default show-comments" type="button"
-                        onclick='$.ajaxSetup({cache: true});
-			    $.getScript("http://flexilef.disqus.com/embed.js");
-			    $.ajaxSetup({cache: false});
-			    $("#disqus_loader").remove();'>
-                  Display Discussion
-                  <span class="glyphicon glyphicon-chevron-down glyph-center"></span>
-                </button>
-              </div>
-              <div id="disqus_thread"></div> <!--Insert this to open Disqus -->
-            </div>
-
-            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-          </div>
-        </div>
-      </div>
-    </div>
+				</div>
+			</div>
+		</div>
 
     <div id="footer">
       <div class="container">
         <ul class="list-inline list-unstyled">
-	  <li><a class="facebook expand" href="#"></a></li>
-	  <li><a class="twitter expand" href="#"></a></li>                    
-	  <li><a class="github expand" href="#"></a></li>
-	</ul>
+					<li><a class="facebook expand" href="#"></a></li>
+					<li><a class="twitter expand" href="#"></a></li>                    
+					<li><a class="github expand" href="#"></a></li>
+				</ul>
         <p class="text-muted">Copyright &copy 2015 Felix Lee </p>
       </div>
     </div>
