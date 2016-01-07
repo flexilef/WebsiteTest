@@ -37,6 +37,18 @@ body {
 
 /*Header code*/
 
+hr {
+    border: none;
+    height: 1px;
+    /* Set the hr color */
+    color: gray; /* old IE */
+    background-color: gray; /* Modern Browsers */
+}
+
+a:hover {
+	text-decoration: none;
+}
+
 .no-vis {
   visibility: hidden;
 }
@@ -130,6 +142,25 @@ img {
   margin: 0 15px 0 15px;
 }
 
+div.blog-banner {
+	margin-top: -20px; /* to counter .navbar's margin-bottom:20px */
+	background-image: url("assets/black-white-abstract-art-forest-website-header.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+	width: 100%;
+	height: 380px;
+	color: black;
+	background-color: black;
+	border-bottom: solid 2px black;
+	border-top: solid 2px black;
+
+	display: flex;
+	justify-content: center; /* align horizontal */
+	align-items: center; 
+}
+
+
 /*end blog page*/
 
 /*Projects page*/
@@ -175,8 +206,12 @@ a:hover >
 
 .page-content 
 a:hover >
-.hover-darken 
-h1, p {
+.hover-darken >
+h1, 
+.page-content 
+a:hover >
+.hover-darken >
+p {
   margin: 0;
   padding: 10px;
 }
@@ -276,6 +311,8 @@ a.projectD {
   background-size: 64px;
   transition: background-size .2s ease-in-out;
 }
+
+/* End footer code */
 
 code {
   font-size: 80%;

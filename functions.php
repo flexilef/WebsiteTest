@@ -111,7 +111,7 @@ function getNextPostID($postID) {
 	
 	return null;
 }
-
+/*
 function getBlogpostFromSlug($inSlug) {
 	$db = new Database();
 	
@@ -130,6 +130,7 @@ function getBlogpostFromSlug($inSlug) {
 	
 	return null;
 }
+*/
 
 function slug($text){ 
 
@@ -154,5 +155,26 @@ function slug($text){
   }
 
   return $text;
+}
+
+/*
+returns a string (stripped of markup) of $wordLength from a blogpost with $postID
+*/
+function getPostExcerpt($postID, $wordLength) {
+	
+	$excerpt = "";
+	
+	if(!empty($postID) && isset($postID))
+	{
+		$row = getBlogposts($postID);
+		$post = $row[0];
+	}
+	
+	$excerpt = strip_tags($post->getPost());
+	
+	if(str_word_count($excerpt) > $wordLength)
+		$excerpt = implode(' ', array_slice(explode(' ', $excerpt), 0, $wordLength));
+	
+	return $excerpt;
 }
 ?>

@@ -17,8 +17,8 @@ and open the template in the editor.
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Blog | Felix Lee</title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="/site.css" rel="stylesheet" type="text/css">
+    <link href="/test/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/test/site.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <div id="wrap">
@@ -32,7 +32,7 @@ and open the template in the editor.
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">BLOG NAME</a>
+            <a class="navbar-brand" href="/test">BleepingBugs</a>
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -44,25 +44,48 @@ and open the template in the editor.
           </div><!--/.nav-collapse -->
         </div>
       </div>
-
-      <!-- Begin page content -->
+			
+			<!-- Web Banner -->
+			<div class="container-fluid blog-banner text-center">
+      </div>			 
+			<!-- Begin page content -->
       <div class="container">
-        <div class="page-header">
-					<h1>List of Blogposts</hi>
-        </div>
         <div class="page-content">
           <div class="row">
             <div class="col-md-8 col-md-offset-1">
              <div class="blog-content">
 								<?php foreach($blogposts as $post) : ?>
-									<p><?php echo $post->getTitle(); ?></p>
-									<p><?php echo $post->getSubtitle(); ?></p>
-									<p><?php echo $post->getPost(); ?> </p>
-									<p><a class="btn btn-primary " href="<?php echo "/test/blog/" . $post->getID() . "/" . 
-									$post->getTitleSlug(); ?>">Read More</a></p>
+									<h2> <!-- title/subtitle -->
+										<a href="<?php echo "/test/blog/" . $post->getID() . "/" . $post->getTitleSlug(); ?>">
+											<?php echo $post->getTitle(); ?> <small><?php echo $post->getSubtitle(); ?></small>
+										</a>
+									</h2>
+									<p> <!-- date posted/author name -->
+										<span class="glyphicon glyphicon-calendar"></span>
+										<?php echo $post->getDatePosted(); ?>
+										<span class="glyphicon glyphicon-user"></span>
+										<?php echo $post->getAuthor(); ?>
+									</p>
+									<p> <!-- post description -->
+										<?php echo getPostExcerpt($post->getID(), 45) . '...'; ?> 
+									</p>
+									<br>
+									<p> <!-- Read more button-->
+										<a class="btn btn-primary" href="<?php echo "/test/blog/" . $post->getID() . "/" . 
+										$post->getTitleSlug(); ?>">Read More</a>
+									</p>
 									<hr>
 								<?php endforeach; ?>
               </div>
+							<ul class="pagination">
+								<li><a href="#">Previous</a></li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">Net</a></li>
+							</ul>
             </div>
             <div class="col-md-2 col-md-offset-1">
               <div class="blog-side text-center">
@@ -101,6 +124,6 @@ and open the template in the editor.
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="test/js/bootstrap.min.js"></script>
   </body>
 </html>

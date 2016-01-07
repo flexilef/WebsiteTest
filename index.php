@@ -21,8 +21,8 @@ $latestPostSlug = $latestPost->getTitleSlug();
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Home | BleepingBugs</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="site.css" rel="stylesheet" type="text/css">
+    <link href="/test/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/test/site.css" rel="stylesheet" type="text/css">
   </head>
   <body>
     <!-- Wrap all page content here -->
@@ -54,16 +54,12 @@ $latestPostSlug = $latestPost->getTitleSlug();
       <div class="container">
         <div class="page-content">
 	  <div class="jumbotron">
-	    <h3 class="text-center">Featured Post by <span class="light-emphasis">[AUTHOR]</span></h3>
-	    <h2 class="text-center">[POST TITLE] <small>[SUBTITLE]</small>
-	      <br><small>[mm/dd/yyyy]</small>
+	    <h3 class="text-center">Featured Post by <span class="light-emphasis"><?php echo $latestPost->getAuthor(); ?></span></h3>
+	    <h2 class="text-center"><?php echo $latestPost->getTitle(); ?> <small><?php echo $latestPost->getSubtitle(); ?></small>
+	      <br><small><?php echo $latestPost->getDatePosted(); ?></small>
 	    </h2>
 	    <h4 class="text-center">
-	      Excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-	      Praesent volutpat turpis tortor. Sed arcu ipsum, eleifend ac justo nec, 
-	      malesuada dictum sapien. Duis ut aliquet neque. Fusce et nunc ac 
-	      libero tempor facilisis. Mauris ornare ac erat sit amet commodo. 
-	      Donec in dui lorem."
+	      Excerpt: <?php echo getPostExcerpt($latestPost->getID(), 45) . '...'; ?>
 	    </h4>
 	    <div class="text-center">
 	      <a class="btn btn-primary " href="<?php echo "/test/blog/" . $latestPostID . "/" . $latestPostSlug;?>">Read More</a>
@@ -87,6 +83,6 @@ $latestPostSlug = $latestPost->getTitleSlug();
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/test/js/bootstrap.min.js"></script>
   </body>
 </html>
