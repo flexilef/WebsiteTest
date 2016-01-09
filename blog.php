@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <?php
-	include 'functions.php';
-	
-	$blogposts = getBlogposts();
+
+require_once('functions.php');
+require_once('classes/class.paginator.php');
+
+$postsPerPage = 1;
+$getParamName = 'p';
+$totalPosts = getTotalBlogpostsCount();
+
+$pages = new Paginator($postsPerPage, $getParamName);
+$pages->setTotalItems($totalPosts);
+$blogposts = getBlogpostsRange($pages->getStart(), $pages->getStart+$postsPerPage);
+
 ?>
 
 <html>
@@ -16,8 +21,8 @@ and open the template in the editor.
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Blog | Felix Lee</title>
-    <link href="/test/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <title>Blog | BleepingBugs</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="/test/site.css" rel="stylesheet" type="text/css">
   </head>
   <body>
@@ -54,29 +59,46 @@ and open the template in the editor.
           <div class="row">
             <div class="col-md-8 col-md-offset-1">
              <div class="blog-content">
-								<?php foreach($blogposts as $post) : ?>
+								<?php 
+								if(!empty($blogposts)) :
+									foreach($blogposts as $post) : 
+										$postID = $post->getID();
+										$postTitle = $post->getTitle();
+										$postSubtitle = $post->getSubtitle();
+										$postSlug = $post->getTitleSlug();
+										$postAuthor = $post->getAuthor();
+										$postDate = $post->getDatePosted();
+										$postExcerpt = getPostExcerpt($postID, 45); 
+								?>
 									<h2> <!-- title/subtitle -->
-										<a href="<?php echo "/test/blog/" . $post->getID() . "/" . $post->getTitleSlug(); ?>">
-											<?php echo $post->getTitle(); ?> <small><?php echo $post->getSubtitle(); ?></small>
+										<a href="<?php echo "/test/blog/" . $postID . "/" . $postSlug ?>">
+											<?php echo $postTitle ?> <small><?php echo $postSubtitle ?></small>
 										</a>
 									</h2>
 									<p> <!-- date posted/author name -->
 										<span class="glyphicon glyphicon-calendar"></span>
-										<?php echo $post->getDatePosted(); ?>
+										<?php echo $postDate ?>
 										<span class="glyphicon glyphicon-user"></span>
-										<?php echo $post->getAuthor(); ?>
+										<?php echo $postAuthor ?>
 									</p>
 									<p> <!-- post description -->
-										<?php echo getPostExcerpt($post->getID(), 45) . '...'; ?> 
+										<?php echo $postExcerpt . '...'; ?> 
 									</p>
 									<br>
 									<p> <!-- Read more button-->
-										<a class="btn btn-primary" href="<?php echo "/test/blog/" . $post->getID() . "/" . 
-										$post->getTitleSlug(); ?>">Read More</a>
+										<a class="btn btn-primary" href="<?php echo "/test/blog/" . $postID . "/" . 
+										$postSlug ?>">Read More</a>
 									</p>
 									<hr>
-								<?php endforeach; ?>
+								<?php endforeach; 
+									else : ?>
+									<h1>No Blogposts Found!</h1>
+								<?php endif; ?>
               </div>
+							<?php
+								echo $pages->createLinks('blog?');
+							?>
+							<!--
 							<ul class="pagination">
 								<li><a href="#">Previous</a></li>
 								<li><a href="#">1</a></li>
@@ -84,8 +106,9 @@ and open the template in the editor.
 								<li><a href="#">3</a></li>
 								<li><a href="#">4</a></li>
 								<li><a href="#">5</a></li>
-								<li><a href="#">Net</a></li>
+								<li><a href="#">Next</a></li>
 							</ul>
+							-->
             </div>
             <div class="col-md-2 col-md-offset-1">
               <div class="blog-side text-center">
@@ -124,6 +147,7 @@ and open the template in the editor.
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="test/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="site.js"></script>
   </body>
 </html>

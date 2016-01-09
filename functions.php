@@ -1,6 +1,6 @@
 <?php
 
-include 'blogpost.php';
+require_once('classes/class.blogpost.php');
 
 function getBlogposts($inID=null, $inTagID=null) 
 {
@@ -15,7 +15,9 @@ function getBlogposts($inID=null, $inTagID=null)
   }
   else if(!empty($inTagID)) 
 	{
-    $query = "SELECT blog_posts.* FROM blog_post_tags LEFT JOIN (blog_posts) ON (blog_post_tags.postID = blog_posts.id) WHERE blog_post_tags.tagID = ? ORDER BY blog_posts.id DESC";
+    $query = "SELECT blog_posts.* FROM blog_post_tags "
+    . "LEFT JOIN (blog_posts) ON (blog_post_tags.blog_post_id = blog_posts.id) "
+    . "WHERE blog_post_tags.tag_id = ? ORDER BY blog_posts.id DESC";
 		
 		$params = array($tagID);
 		$rows = $db->select($query, $params);
@@ -28,21 +30,42 @@ function getBlogposts($inID=null, $inTagID=null)
 	
 	$postArray = array();
 	
-	if(!$rows) {
-		echo '0 results ';
-		echo 'Whole query: ' . $query; 
-		}
-	else {
-		foreach($rows as $row)
-		{
+	foreach($rows as $row)
+	{
 			$myPost = new BlogPost($row['id'], $row['title'], $row['title_slug'], $row['subtitle'], 
 														$row['post'],	$row['author_id'], $row['date_posted']);
 														
 			array_push($postArray, $myPost);
-		}
 	}
 	
 	return $postArray;
+}
+
+function getBlogpostsRange($limitStart, $limitEnd) {
+	$db = new Database();
+	
+	$query = "SELECT * FROM blog_posts ORDER BY id DESC LIMIT $limitStart, $limitEnd";
+	
+	$rows = $db->select($query);
+	
+	$postArray = array();
+	
+	foreach($rows as $row) {
+		$myPost = new BlogPost($row['id'], $row['title'], $row['title_slug'], $row['subtitle'], 
+														$row['post'],	$row['author_id'], $row['date_posted']);
+														
+		array_push($postArray, $myPost);
+	}
+	
+	return $postArray;
+}
+
+function getTotalBlogpostsCount() {
+	$db = new Database();
+	
+	$row = $db->select("SELECT COUNT(*) FROM blog_posts");
+	
+	return intval($row[0]['COUNT(*)']);
 }
 
 function getLatestBlogpost()

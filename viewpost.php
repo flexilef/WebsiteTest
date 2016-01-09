@@ -1,11 +1,7 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <?php
-	include 'functions.php';
+	require_once('functions.php');
 	
 	if(isset($_GET['id']) && !empty($_GET['id'])) {
 		
@@ -43,7 +39,7 @@ and open the template in the editor.
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Blog | Felix Lee</title>
-    <link href="/test/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="/test/site.css" rel="stylesheet" type="text/css">
   </head>
   <body>
@@ -149,6 +145,6 @@ and open the template in the editor.
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="/test/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   </body>
 </html>

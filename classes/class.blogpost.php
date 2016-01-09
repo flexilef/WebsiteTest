@@ -1,6 +1,6 @@
 <?php
 
-include 'database.php';
+require_once('classes/class.database.php');
 
 class BlogPost 
 {

@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 
 <?php
 
-include 'functions.php';
+require_once 'functions.php';
 
 $latestPost = getLatestBlogpost();
+
 $latestPostID = $latestPost->getID();
+$latestPostTitle = $latestPost->getTitle();
+$latestPostSubtitle = $latestPost->getSubtitle();
 $latestPostSlug = $latestPost->getTitleSlug();
+$latestPostAuthor = $latestPost->getAuthor();
+$latestPostDate = $latestPost->getDatePosted();
+$latestPostExcerpt = getPostExcerpt($latestPostID, 45);
+
 ?>
 
 <html>
@@ -21,7 +23,7 @@ $latestPostSlug = $latestPost->getTitleSlug();
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Home | BleepingBugs</title>
-    <link href="/test/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="/test/site.css" rel="stylesheet" type="text/css">
   </head>
   <body>
@@ -54,12 +56,12 @@ $latestPostSlug = $latestPost->getTitleSlug();
       <div class="container">
         <div class="page-content">
 	  <div class="jumbotron">
-	    <h3 class="text-center">Featured Post by <span class="light-emphasis"><?php echo $latestPost->getAuthor(); ?></span></h3>
-	    <h2 class="text-center"><?php echo $latestPost->getTitle(); ?> <small><?php echo $latestPost->getSubtitle(); ?></small>
-	      <br><small><?php echo $latestPost->getDatePosted(); ?></small>
+	    <h3 class="text-center">Featured Post by <span class="light-emphasis"><?php echo $latestPostAuthor ?></span></h3>
+	    <h2 class="text-center"><?php echo $latestPostTitle ?> <small><?php echo $latestPostSubtitle ?></small>
+	      <br><small><?php echo $latestPostDate ?></small>
 	    </h2>
 	    <h4 class="text-center">
-	      Excerpt: <?php echo getPostExcerpt($latestPost->getID(), 45) . '...'; ?>
+	      <?php echo '"' . $latestPostExcerpt . '..."'; ?>
 	    </h4>
 	    <div class="text-center">
 	      <a class="btn btn-primary " href="<?php echo "/test/blog/" . $latestPostID . "/" . $latestPostSlug;?>">Read More</a>
@@ -83,6 +85,7 @@ $latestPostSlug = $latestPost->getTitleSlug();
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="/test/js/bootstrap.min.js"></script>
   </body>
 </html>
