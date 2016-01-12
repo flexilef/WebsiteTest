@@ -9,4 +9,4 @@ RewriteCond %{REQUEST_FILENAME} !-d [NC]
 RewriteCond %{REQUEST_FILENAME} !-f [NC]
 
 RewriteRule ^blog$ blog.php
-RewriteRule ^blog/(\d)/?(.*)$ viewpost.php?id=$1
+RewriteRule ^blog/(\d*)/?(.*)$ viewpost.php?id=$1

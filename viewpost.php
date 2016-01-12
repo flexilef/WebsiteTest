@@ -1,35 +1,52 @@
-<!DOCTYPE html>
-
 <?php
+/*
+	This page is used to display individual blogposts. .htaccess file
+	rewrites links of blogposts to this page. .htaccess also feeds 
+	the get parameter to be used to get the selected blogpost.
+*/
+
 	require_once('functions.php');
 	
-	if(isset($_GET['id']) && !empty($_GET['id'])) {
+	if(!empty($_GET['id'])) {
 		
-		$curPostID = $_GET['id'];
-		
-		//add checks if getBlogPost does not return a blogpost, then redirect to 404
-		//http://stackoverflow.com/questions/6189169/redirect-to-404-page-or-display-404-message
-		$row = getBlogPosts($curPostID);
-		$blogpost = $row[0];
+		$currentPostID = $_GET['id'];
+		$blogpost = getBlogpostByID($currentPostID);
+
+		if(!is_null($blogpost)) {
+			$blogpostID = $blogpost->getID();
+			$blogpostTitle = $blogpost->getTitle();
+			$blogpostSubtitle = $blogpost->getSubtitle();
+			$blogpostSlug = $blogpost->getTitleSlug();
+			$blogpostAuthor = $blogpost->getAuthor();
+			$blogpostPost = $blogpost->getPost();			
+			$blogpostDate = date('M jS Y H:i:s', strtotime($blogpost->getDatePosted()));
+			
+			$prevPost = getPreviousBlogpost($currentPostID);
+			$nextPost = getNextBlogpost($currentPostID);
+	
+			if(!is_null($prevPost)) {
+				$prevPostID = $prevPost->getID();
+				$prevPostSlug = $prevPost->getTitleSlug();
+				$prevPostTitle = $prevPost->getTitle();
+			}
+			
+			if(!is_null($nextPost)) {
+				$nextPostID = $nextPost->getID();
+				$nextPostSlug = $nextPost->getTitleSlug();
+				$nextPostTitle = $nextPost->getTitle();
+			}
+		}
+		else {
+			 header('HTTP/1.0 400 Bad Request', true, 400);
+			 include('error400.html');
+			 exit();
+		}
 	}
 	else {
-		//TODO: instead of displaying the latest post, change to display a 
-		//list of all the posts with short descriptions and pagination
-		$blogpost = getLatestBlogpost();
-		$curPostID = $blogpost->getID();
+		header('HTTP/1.0 404 Not Found', true, 404);
+		include('error404.html');
+		exit();
 	}
-	
-	$earliestPostID = getEarliestBlogpostID();
-	$latestPostID = getLatestBlogpostID();
-
-	$prevPostID = getPreviousPostID($curPostID);
-	$nextPostID = getNextPostID($curPostID);
-	
-	$row = getBlogposts($prevPostID);
-	$prevPostSlug = $row[0]->getTitleSlug();
-	
-	$row = getBlogposts($nextPostID);
-	$nextPostSlug = $row[0]->getTitleSlug();
 ?>
 
 <html>
@@ -38,7 +55,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Blog | Felix Lee</title>
+    <title>Blog | BleepingBugs</title>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="/test/site.css" rel="stylesheet" type="text/css">
   </head>
@@ -70,24 +87,25 @@
       <!-- Begin page content -->
       <div class="container">
         <div class="page-header">
-          <h1><?php echo $blogpost->getTitle()?> <small><?php echo $blogpost->getSubtitle()?></small></h1>
-          <p class="lead">Written by <?php echo $blogpost->getAuthor() . " on "?><small><?php echo $blogpost->getDatePosted()?></small></p>
+          <h1><?php echo $blogpostTitle ?> <small><?php echo $blogpostSubtitle ?></small></h1>
+          <p class="lead">By <?php echo $blogpostAuthor?><br>
+						<small><?php echo 'On ' . $blogpostDate ?></small></p>
         </div>
         <div class="page-content">
           <div class="row">
             <div class="col-md-8 col-md-offset-1">
               <div class="blog-content">
 								<p>
-									<?php echo $blogpost->getPost() . " postID: " . $curPostID ;?>
+									<?php echo $blogpostPost . " postID: " . $currentPostID ;?>
               </div>
               <ul class="pager">
 								<?php
-									if($curPostID != $earliestPostID) : ?>
-                <li><?php echo '<a href=/test/blog/' . $prevPostID . "/" . $prevPostSlug . '>';?>Previous</a></li>
+									if(!is_null($prevPostID)) : ?>
+								<li><?php echo '<a href=/test/blog/' . $prevPostID . "/" . $prevPostSlug . '>';?>Previous: <?php echo $prevPostTitle ?></a></li>
 								<?php endif; ?>
 								<?php 
-									if($curPostID != $latestPostID) : ?>
-                <li><?php echo '<a href=/test/blog/' . $nextPostID . "/" . $nextPostSlug . '>';?>Next</a></li>
+									if(!is_null($nextPostID)) : ?>
+                <li><?php echo '<a href=/test/blog/' . $nextPostID . "/" . $nextPostSlug . '>';?>Next: <?php echo $nextPostTitle ?></a></li>
 								<?php endif; ?>
               </ul>
             </div>

@@ -1,8 +1,7 @@
 <?php
-
 require_once('classes/class.database.php');
 
-class BlogPost 
+class Blogpost
 {
   private $id;
   private $title;
@@ -15,8 +14,8 @@ class BlogPost
 	
 	private $connection;
 
-	function __construct($inID=null, $inTitle=null, $inSlug=null, $inSubtitle=null, $inPost=null,
-						$inAuthorID=null, $inDatePosted=null)
+	function __construct($inID=null, $inTitle=null, $inSlug=null, $inSubtitle=null, 
+												$inPost=null, $inAuthorID=null, $inDatePosted=null)
 	{
 		$db = new Database();
 
@@ -58,8 +57,9 @@ class BlogPost
 
 		if(!empty($inDatePosted))  
 		{
-			$splitDate = explode("-", $inDatePosted);
-			$this->datePosted = $splitDate[1] . "/" . $splitDate[2] . "/" . $splitDate[0];
+			//$splitDate = explode("-", $inDatePosted);
+			//$this->datePosted = $splitDate[1] . "/" . $splitDate[2] . "/" . $splitDate[0];
+			$this->datePosted = $inDatePosted;
 		}
 		
 		//fix the following to use prepared statements
@@ -135,5 +135,4 @@ class BlogPost
 		return $this->datePosted;
 	}
 }
-
-?>   
+?>

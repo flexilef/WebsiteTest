@@ -32,6 +32,7 @@ class Database {
 	}
 	
 	//$params is an array of bounded values to the prepared query
+	//@return false if query failed else array of results (empty array if no results)
 	public function select($query, $params=null) {
 	
 		$connection = $this->connect();

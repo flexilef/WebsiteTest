@@ -5,11 +5,11 @@
 require_once('functions.php');
 require_once('classes/class.paginator.php');
 
-$postsPerPage = 1;
-$getParamName = 'p';
+$postsPerPage = 2;
+$GETParamName = 'p';
 $totalPosts = getTotalBlogpostsCount();
-
-$pages = new Paginator($postsPerPage, $getParamName);
+var_dump($totalPosts);
+$pages = new Paginator($postsPerPage, $GETParamName);
 $pages->setTotalItems($totalPosts);
 $blogposts = getBlogpostsRange($pages->getStart(), $pages->getStart+$postsPerPage);
 

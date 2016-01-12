@@ -57,7 +57,7 @@
 				//numbered links
 				for($counter = 1; $counter <= $lastPage; $counter++) {
 					if($counter == $this->currentPage)
-						$pagination.= "<li class=\"active\"><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+						$pagination.= "<li class=\"active\"><span>$counter</span></li>";
 					else
 						$pagination.= "<li><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
 				}
