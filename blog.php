@@ -5,14 +5,15 @@
 require_once('functions.php');
 require_once('classes/class.paginator.php');
 
-$postsPerPage = 2;
+$postsPerPage = 3;
 $GETParamName = 'p';
 $totalPosts = getTotalBlogpostsCount();
-var_dump($totalPosts);
+
 $pages = new Paginator($postsPerPage, $GETParamName);
 $pages->setTotalItems($totalPosts);
-$blogposts = getBlogpostsRange($pages->getStart(), $pages->getStart+$postsPerPage);
 
+$offset = $pages->getItemsOffset();
+$blogposts = getRecentBlogposts($offset, $postsPerPage);
 ?>
 
 <html>
@@ -96,7 +97,7 @@ $blogposts = getBlogpostsRange($pages->getStart(), $pages->getStart+$postsPerPag
 								<?php endif; ?>
               </div>
 							<?php
-								echo $pages->createLinks('blog?');
+								echo $pages->createLinks('blog?', 2, 2);
 							?>
 							<!--
 							<ul class="pagination">

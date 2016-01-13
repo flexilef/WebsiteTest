@@ -116,19 +116,19 @@ function getBlogpostByID($id) {
 */
 function getBlogpostsByDateRange($startDate, $endDate) {
 	$db = new Database();
-	
+
 	$query = "SELECT * FROM blog_posts WHERE date_posted BETWEEN ? AND ?";
 	
 	$params = array($startDate, $endDate);
 	$rows = $db->select($query, $params);
 	
 	$postArray = array();
-	
+
 	if(!empty($rows)) {
 		foreach($rows as $row) {
-			$post = new Blogpost($row[0]['id'], $row[0]['title'], $row[0]['title_slug'],
-														$row[0]['subtitle'], $row[0]['post'], $row[0]['author_id'], 
-														$row[0]['date_posted']);
+			$post = new Blogpost($row['id'], $row['title'], $row['title_slug'],
+														$row['subtitle'], $row['post'], $row['author_id'], 
+														$row['date_posted']);
 			
 			array_push($postArray, $post);
 		}
@@ -137,6 +137,39 @@ function getBlogpostsByDateRange($startDate, $endDate) {
 	return $postArray;
 }
 
+/*
+$offset is the number of posts to skip
+$count is the number of posts starting from offset to select
+Returns an array of most recent blogposts
+*/
+function getRecentBlogposts($offset, $count) {
+	$db = new Database();
+	$conn = $db->connect();
+
+	$query = "SELECT * FROM blog_posts ORDER BY date_posted DESC LIMIT :offset , :count";
+	
+	$stmt = $conn->prepare($query);
+	$stmt->bindValue(':offset', $offset, PDO::PARAM_INT); 
+	$stmt->bindValue(':count', $count, PDO::PARAM_INT); 
+	$stmt->execute();
+	
+	$rows = $stmt->fetchAll();
+	
+	$postArray = array();
+	
+	if(!empty($rows)) {
+		foreach($rows as $row) {
+			$post = new Blogpost($row['id'], $row['title'], $row['title_slug'],
+														$row['subtitle'], $row['post'], $row['author_id'], 
+														$row['date_posted']);
+			
+			array_push($postArray, $post);			
+		}
+	}
+	
+	return $postArray;
+}
+/*
 function getLatestBlogpost() {
 	$db = new Database();
 	
@@ -172,7 +205,7 @@ function getEarliestBlogpost() {
 	
 	return $post;
 }
-
+*/
 function getPreviousBlogpost($currentID) {
 	$db = new Database();
 	
@@ -240,9 +273,9 @@ function getPostExcerpt($postID, $wordLength) {
 	
 	if(!empty($postID)) {
 		$post = getBlogpostByID($postID);
-	}
 	
-	$excerpt = strip_tags($post->getPost());
+		$excerpt = strip_tags($post->getPost());
+	}
 	
 	if(str_word_count($excerpt) > $wordLength)
 		$excerpt = implode(' ', array_slice(explode(' ', $excerpt), 0, $wordLength));
