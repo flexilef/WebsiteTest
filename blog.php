@@ -5,7 +5,7 @@
 require_once('functions.php');
 require_once('classes/class.paginator.php');
 
-$postsPerPage = 3;
+$postsPerPage = 5;
 $GETParamName = 'p';
 $totalPosts = getTotalBlogpostsCount();
 
@@ -99,17 +99,6 @@ $blogposts = getRecentBlogposts($offset, $postsPerPage);
 							<?php
 								echo $pages->createLinks('blog?', 2, 2);
 							?>
-							<!--
-							<ul class="pagination">
-								<li><a href="#">Previous</a></li>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">Next</a></li>
-							</ul>
-							-->
             </div>
             <div class="col-md-2 col-md-offset-1">
               <div class="blog-side text-center">

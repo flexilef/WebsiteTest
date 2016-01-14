@@ -52,7 +52,7 @@
 			
 			if($this->itemsPerPage > 0)
 				$lastPage = ceil($this->totalItems/$this->itemsPerPage);
-						
+				
 			$currentPage = $this->currentPage;
 			$penultativePage = $lastPage - 1;
 			
@@ -70,12 +70,17 @@
 				$numDefaultLinksPerSide = $defaultCount;				
 				$numAdjacentLinks = $adjacentCount;
 				
-				//if there are enough pages to display using the following rules
+				//if there are enough pages to display, display using the following rules
 				if($lastPage > (($numDefaultLinksPerSide*2)+($numAdjacentLinks*2+1))) {
 				
 					//***first $numDefaultLinksPerSide links***
 					for($counter = 1; $counter <= $numDefaultLinksPerSide; $counter++) {
-						$pagination.= "<li><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+						if($counter == $currentPage) {
+							$pagination.= "<li class=\"active\"><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+						}
+						else {
+							$pagination.= "<li><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+						}
 					}
 					
 					//***middle links***
@@ -89,9 +94,14 @@
 							$pagination.= "<li><span>...</span></li>";
 						}
 						
-						//current page links and adjacents
+						//current page's links and its adjacent links
 						for($counter = $currentPage-$numAdjacentLinks; $counter <= $currentPage+$numAdjacentLinks; $counter++) {
-							$pagination.= "<li><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+							if($counter == $currentPage) {
+								$pagination.= "<li class=\"active\"><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+							}
+							else {
+								$pagination.= "<li><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+							}
 						}
 						
 						//if $currentPage's adjacent links skip later links, add "..."
@@ -100,31 +110,45 @@
 							$pagination.= "<li><span>...</span></li>";
 						}
 					}
-					//not enough buffer on the left side
+					//else if not enough buffer on the left side, display more links on right
 					else if($currentPage <= $numDefaultLinksPerSide+$numAdjacentLinks) {
 						$numOverlappepLinks = abs($currentPage-$numDefaultLinksPerSide-$numAdjacentLinks-1);
 						
 						for($counter=$numDefaultLinksPerSide+1; $counter<=$currentPage+$numAdjacentLinks+$numOverlappepLinks; $counter++) {
-							$pagination.= "<li><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+							if($counter == $currentPage) {
+								$pagination.= "<li class=\"active\"><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+							}
+							else {
+								$pagination.= "<li><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+							}
 						}
 						
 						$pagination.= "<li><span>...</span></li>";
 					}
-					//not enough buffer on the right side
+					//else if not enough buffer on the right side, display more links on the left
 					else if($currentPage > $lastPage-($numDefaultLinksPerSide+$numAdjacentLinks)) {
 						$numOverlappepLinks = abs($lastPage-$currentPage-$numDefaultLinksPerSide-$numAdjacentLinks);
 						
 						$pagination.= "<li><span>...</span></li>";
 
 						for($counter=$currentPage-$numAdjacentLinks-$numOverlappepLinks; $counter<=$lastPage-$numDefaultLinksPerSide; $counter++) {
-							$pagination.= "<li><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+							if($counter == $currentPage) {
+								$pagination.= "<li class=\"active\"><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+							}
+							else {
+								$pagination.= "<li><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+							}
 						}
 					}
 
 					//***last $numDefaultLinksPerSide links***
-					for($counter = $lastPage-$numDefaultLinksPerSide+1; $counter <= $lastPage; $counter++)
-					{
-						$pagination.= "<li><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+					for($counter = $lastPage-$numDefaultLinksPerSide+1; $counter <= $lastPage; $counter++) {
+						if($counter == $currentPage) {
+							$pagination.= "<li class=\"active\"><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+						}
+						else {
+							$pagination.= "<li><a href=\"" . $path . "$this->instance=$counter\"" . ">$counter</a></li>";
+						}
 					}
 				}
 				//not enough pages? then just display all we have with no special rules
