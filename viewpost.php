@@ -1,52 +1,52 @@
 <?php
 /*
-	This page is used to display individual blogposts. .htaccess file
-	rewrites links of blogposts to this page. .htaccess also feeds 
-	the get parameter to be used to get the selected blogpost.
+  This page is used to display individual blogposts. .htaccess file
+  rewrites links of blogposts to this page. .htaccess also feeds 
+  the get parameter to be used to get the selected blogpost.
 */
 
-	require_once('functions.php');
-	
-	if(!empty($_GET['id'])) {
-		
-		$currentPostID = $_GET['id'];
-		$blogpost = getBlogpostByID($currentPostID);
+  require_once('functions.php');
+  
+  if(!empty($_GET['id'])) {
+    
+    $currentPostID = $_GET['id'];
+    $blogpost = getBlogpostByID($currentPostID);
 
-		if(!is_null($blogpost)) {
-			$blogpostID = $blogpost->getID();
-			$blogpostTitle = $blogpost->getTitle();
-			$blogpostSubtitle = $blogpost->getSubtitle();
-			$blogpostSlug = $blogpost->getTitleSlug();
-			$blogpostAuthor = $blogpost->getAuthor();
-			$blogpostPost = $blogpost->getPost();			
-			$blogpostDate = date('M jS Y H:i:s', strtotime($blogpost->getDatePosted()));
-			
-			$prevPost = getPreviousBlogpost($currentPostID);
-			$nextPost = getNextBlogpost($currentPostID);
-	
-			if(!is_null($prevPost)) {
-				$prevPostID = $prevPost->getID();
-				$prevPostSlug = $prevPost->getTitleSlug();
-				$prevPostTitle = $prevPost->getTitle();
-			}
-			
-			if(!is_null($nextPost)) {
-				$nextPostID = $nextPost->getID();
-				$nextPostSlug = $nextPost->getTitleSlug();
-				$nextPostTitle = $nextPost->getTitle();
-			}
-		}
-		else {
-			 header('HTTP/1.0 400 Bad Request', true, 400);
-			 include('error400.html');
-			 exit();
-		}
-	}
-	else {
-		header('HTTP/1.0 404 Not Found', true, 404);
-		include('error404.html');
-		exit();
-	}
+    if(!is_null($blogpost)) {
+      $blogpostID = $blogpost->getID();
+      $blogpostTitle = $blogpost->getTitle();
+      $blogpostSubtitle = $blogpost->getSubtitle();
+      $blogpostSlug = $blogpost->getTitleSlug();
+      $blogpostAuthor = $blogpost->getAuthor();
+      $blogpostPost = $blogpost->getPost();     
+      $blogpostDate = date('M jS Y H:i:s', strtotime($blogpost->getDatePosted()));
+      
+      $prevPost = getPreviousBlogpost($currentPostID);
+      $nextPost = getNextBlogpost($currentPostID);
+  
+      if(!is_null($prevPost)) {
+        $prevPostID = $prevPost->getID();
+        $prevPostSlug = $prevPost->getTitleSlug();
+        $prevPostTitle = $prevPost->getTitle();
+      }
+      
+      if(!is_null($nextPost)) {
+        $nextPostID = $nextPost->getID();
+        $nextPostSlug = $nextPost->getTitleSlug();
+        $nextPostTitle = $nextPost->getTitle();
+      }
+    }
+    else {
+       header('HTTP/1.0 400 Bad Request', true, 400);
+       include('error400.html');
+       exit();
+    }
+  }
+  else {
+    header('HTTP/1.0 404 Not Found', true, 404);
+    include('error404.html');
+    exit();
+  }
 ?>
 
 <html>
@@ -56,7 +56,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Blog | BleepingBugs</title>
-		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="/test/site.css" rel="stylesheet" type="text/css">
   </head>
   <body>
@@ -89,24 +89,24 @@
         <div class="page-header">
           <h1><?php echo $blogpostTitle ?> <small><?php echo $blogpostSubtitle ?></small></h1>
           <p class="lead">By <?php echo $blogpostAuthor?><br>
-						<small><?php echo 'On ' . $blogpostDate ?></small></p>
+            <small><?php echo 'On ' . $blogpostDate ?></small></p>
         </div>
         <div class="page-content">
           <div class="row">
             <div class="col-md-8 col-md-offset-1">
               <div class="blog-content">
-								<p>
-									<?php echo $blogpostPost . " postID: " . $currentPostID ;?>
+                <p>
+                  <?php echo $blogpostPost . " postID: " . $currentPostID ;?>
               </div>
               <ul class="pager">
-								<?php
-									if(!is_null($prevPostID)) : ?>
-								<li><?php echo '<a href=/test/blog/' . $prevPostID . "/" . $prevPostSlug . '>';?>Previous: <?php echo $prevPostTitle ?></a></li>
-								<?php endif; ?>
-								<?php 
-									if(!is_null($nextPostID)) : ?>
+                <?php
+                  if(!is_null($prevPostID)) : ?>
+                <li><?php echo '<a href=/test/blog/' . $prevPostID . "/" . $prevPostSlug . '>';?>Previous: <?php echo $prevPostTitle ?></a></li>
+                <?php endif; ?>
+                <?php 
+                  if(!is_null($nextPostID)) : ?>
                 <li><?php echo '<a href=/test/blog/' . $nextPostID . "/" . $nextPostSlug . '>';?>Next: <?php echo $nextPostTitle ?></a></li>
-								<?php endif; ?>
+                <?php endif; ?>
               </ul>
             </div>
             <div class="col-md-2 col-md-offset-1">
@@ -133,9 +133,9 @@
               <div id="disqus_loader">
                 <button class="btn btn-default show-comments" type="button"
                         onclick='$.ajaxSetup({cache: true});
-			    $.getScript("http://flexilef.disqus.com/embed.js");
-			    $.ajaxSetup({cache: false});
-			    $("#disqus_loader").remove();'>
+          $.getScript("http://flexilef.disqus.com/embed.js");
+          $.ajaxSetup({cache: false});
+          $("#disqus_loader").remove();'>
                   Display Discussion
                   <span class="glyphicon glyphicon-chevron-down glyph-center"></span>
                 </button>
@@ -152,10 +152,10 @@
     <div id="footer">
       <div class="container">
         <ul class="list-inline list-unstyled">
-	  <li><a class="facebook expand" href="#"></a></li>
-	  <li><a class="twitter expand" href="#"></a></li>                    
-	  <li><a class="github expand" href="#"></a></li>
-	</ul>
+    <li><a class="facebook expand" href="#"></a></li>
+    <li><a class="twitter expand" href="#"></a></li>                    
+    <li><a class="github expand" href="#"></a></li>
+  </ul>
         <p class="text-muted">Copyright &copy 2015 Felix Lee </p>
       </div>
     </div>

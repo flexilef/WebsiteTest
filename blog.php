@@ -50,55 +50,55 @@ $blogposts = getRecentBlogposts($offset, $postsPerPage);
           </div><!--/.nav-collapse -->
         </div>
       </div>
-			
-			<!-- Web Banner -->
-			<div class="container-fluid blog-banner text-center">
-      </div>			 
-			<!-- Begin page content -->
+      
+      <!-- Web Banner -->
+      <div class="container-fluid blog-banner text-center">
+      </div>       
+      <!-- Begin page content -->
       <div class="container">
         <div class="page-content">
           <div class="row">
             <div class="col-md-8 col-md-offset-1">
              <div class="blog-content">
-								<?php 
-								if(!empty($blogposts)) :
-									foreach($blogposts as $post) : 
-										$postID = $post->getID();
-										$postTitle = $post->getTitle();
-										$postSubtitle = $post->getSubtitle();
-										$postSlug = $post->getTitleSlug();
-										$postAuthor = $post->getAuthor();
-										$postDate = $post->getDatePosted();
-										$postExcerpt = getPostExcerpt($postID, 45); 
-								?>
-									<h2> <!-- title/subtitle -->
-										<a href="<?php echo "/test/blog/" . $postID . "/" . $postSlug ?>">
-											<?php echo $postTitle ?> <small><?php echo $postSubtitle ?></small>
-										</a>
-									</h2>
-									<p> <!-- date posted/author name -->
-										<span class="glyphicon glyphicon-calendar"></span>
-										<?php echo $postDate ?>
-										<span class="glyphicon glyphicon-user"></span>
-										<?php echo $postAuthor ?>
-									</p>
-									<p> <!-- post description -->
-										<?php echo $postExcerpt . '...'; ?> 
-									</p>
-									<br>
-									<p> <!-- Read more button-->
-										<a class="btn btn-primary" href="<?php echo "/test/blog/" . $postID . "/" . 
-										$postSlug ?>">Read More</a>
-									</p>
-									<hr>
-								<?php endforeach; 
-									else : ?>
-									<h1>No Blogposts Found!</h1>
-								<?php endif; ?>
+                <?php 
+                if(!empty($blogposts)) :
+                  foreach($blogposts as $post) : 
+                    $postID = $post->getID();
+                    $postTitle = $post->getTitle();
+                    $postSubtitle = $post->getSubtitle();
+                    $postSlug = $post->getTitleSlug();
+                    $postAuthor = $post->getAuthor();
+                    $postDate = $post->getDatePosted();
+                    $postExcerpt = getPostExcerpt($postID, 45); 
+                ?>
+                  <h2> <!-- title/subtitle -->
+                    <a href="<?php echo "/test/blog/" . $postID . "/" . $postSlug ?>">
+                      <?php echo $postTitle ?> <small><?php echo $postSubtitle ?></small>
+                    </a>
+                  </h2>
+                  <p> <!-- date posted/author name -->
+                    <span class="glyphicon glyphicon-calendar"></span>
+                    <?php echo $postDate ?>
+                    <span class="glyphicon glyphicon-user"></span>
+                    <?php echo $postAuthor ?>
+                  </p>
+                  <p> <!-- post description -->
+                    <?php echo $postExcerpt . '...'; ?> 
+                  </p>
+                  <br>
+                  <p> <!-- Read more button-->
+                    <a class="btn btn-primary" href="<?php echo "/test/blog/" . $postID . "/" . 
+                    $postSlug ?>">Read More</a>
+                  </p>
+                  <hr>
+                <?php endforeach; 
+                  else : ?>
+                  <h1>No Blogposts Found!</h1>
+                <?php endif; ?>
               </div>
-							<?php
-								echo $pages->createLinks('blog?', 2, 2);
-							?>
+              <?php
+                echo $pages->createLinks('blog?', 2, 2);
+              ?>
             </div>
             <div class="col-md-2 col-md-offset-1">
               <div class="blog-side text-center">
@@ -119,17 +119,17 @@ $blogposts = getRecentBlogposts($offset, $postsPerPage);
               </div>
             </div>
           </div> <!-- End row -->
-				</div>
-			</div>
-		</div>
+        </div>
+      </div>
+    </div>
 
     <div id="footer">
       <div class="container">
         <ul class="list-inline list-unstyled">
-					<li><a class="facebook expand" href="#"></a></li>
-					<li><a class="twitter expand" href="#"></a></li>                    
-					<li><a class="github expand" href="#"></a></li>
-				</ul>
+          <li><a class="facebook expand" href="#"></a></li>
+          <li><a class="twitter expand" href="#"></a></li>                    
+          <li><a class="github expand" href="#"></a></li>
+        </ul>
         <p class="text-muted">Copyright &copy 2015 Felix Lee </p>
       </div>
     </div>
@@ -138,6 +138,6 @@ $blogposts = getRecentBlogposts($offset, $postsPerPage);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="site.js"></script>
+    <script type="text/javascript" src="site.js"></script>
   </body>
 </html>

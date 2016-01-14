@@ -17,7 +17,7 @@ $latestPostExcerpt = getPostExcerpt($latestPostID, 45);
 ?>
 
 <html>
-  <head>
+  <head>  
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,7 +43,7 @@ $latestPostExcerpt = getPostExcerpt($latestPostID, 45);
           </div>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-							<li><a href="/test/blog">Blog</a></li>
+              <li><a href="/test/blog">Blog</a></li>
               <li><a href="/test/projects.html">Projects</a></li>
               <li><a href="/test/about.html">About</a></li>
               <li><a href="/test/contact.html">Contact</a></li>
@@ -55,37 +55,37 @@ $latestPostExcerpt = getPostExcerpt($latestPostID, 45);
       <!-- Begin page content -->
       <div class="container">
         <div class="page-content">
-	  <div class="jumbotron">
-	    <h3 class="text-center">Featured Post by <span class="light-emphasis"><?php echo $latestPostAuthor ?></span></h3>
-	    <h2 class="text-center"><?php echo $latestPostTitle ?> <small><?php echo $latestPostSubtitle ?></small>
-	      <br><small><?php echo $latestPostDate ?></small>
-	    </h2>
-	    <h4 class="text-center">
-	      <?php echo '"' . $latestPostExcerpt . '..."'; ?>
-	    </h4>
-	    <div class="text-center">
-	      <a class="btn btn-primary " href="<?php echo "/test/blog/" . $latestPostID . "/" . $latestPostSlug;?>">Read More</a>
-	    </div>
-	  </div>
-	</div>
+    <div class="jumbotron">
+      <h3 class="text-center">Featured Post by <span class="light-emphasis"><?php echo $latestPostAuthor ?></span></h3>
+      <h2 class="text-center"><?php echo $latestPostTitle ?> <small><?php echo $latestPostSubtitle ?></small>
+        <br><small><?php echo $latestPostDate ?></small>
+      </h2>
+      <h4 class="text-center">
+        <?php echo '"' . $latestPostExcerpt . '..."'; ?>
+      </h4>
+      <div class="text-center">
+        <a class="btn btn-primary " href="<?php echo "/test/blog/" . $latestPostID . "/" . $latestPostSlug;?>">Read More</a>
+      </div>
+    </div>
+  </div>
       </div>
     </div>
 
     <div id="footer" class="transparent">
       <div class="container">
-	<ul class="list-inline list-unstyled">
-	  <li><a class="facebook expand" href="#"></a></li>
-	  <li><a class="twitter expand" href="#"></a></li>                    
-	  <li><a class="github expand" href="#"></a></li>
-	</ul>
-	<p class="text-muted">Copyright &copy 2015 Felix Lee </p>
+  <ul class="list-inline list-unstyled">
+    <li><a class="facebook expand" href="#"></a></li>
+    <li><a class="twitter expand" href="#"></a></li>                    
+    <li><a class="github expand" href="#"></a></li>
+  </ul>
+  <p class="text-muted">Copyright &copy 2015 Felix Lee </p>
       </div>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="/test/js/bootstrap.min.js"></script>
   </body>
 </html>
