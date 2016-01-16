@@ -19,7 +19,7 @@
       $blogpostSlug = $blogpost->getTitleSlug();
       $blogpostAuthor = $blogpost->getAuthor();
       $blogpostPost = $blogpost->getPost();     
-      $blogpostDate = date('M jS Y H:i:s', strtotime($blogpost->getDatePosted()));
+      $blogpostDate = date('M jS Y - H:i:s', strtotime($blogpost->getDatePosted()));
       
       $prevPost = getPreviousBlogpost($currentPostID);
       $nextPost = getNextBlogpost($currentPostID);
@@ -58,6 +58,10 @@
     <title>Blog | BleepingBugs</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="/test/site.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
+
   </head>
   <body>
     <div id="wrap">
@@ -87,9 +91,9 @@
       <!-- Begin page content -->
       <div class="container">
         <div class="page-header">
-          <h1><?php echo $blogpostTitle ?> <small><?php echo $blogpostSubtitle ?></small></h1>
-          <p class="lead">By <?php echo $blogpostAuthor?><br>
-            <small><?php echo 'On ' . $blogpostDate ?></small></p>
+          <h1><b><?php echo $blogpostTitle ?> <small><?php echo $blogpostSubtitle ?></small></b></h1>
+          <h2>By <b><?php echo $blogpostAuthor?></b></h2>
+            <h2>On <b><?php echo $blogpostDate ?></b></h2>
         </div>
         <div class="page-content">
           <div class="row">
@@ -97,17 +101,28 @@
               <div class="blog-content">
                 <p>
                   <?php echo $blogpostPost . " postID: " . $currentPostID ;?>
+                </p>
               </div>
-              <ul class="pager">
-                <?php
-                  if(!is_null($prevPostID)) : ?>
-                <li><?php echo '<a href=/test/blog/' . $prevPostID . "/" . $prevPostSlug . '>';?>Previous: <?php echo $prevPostTitle ?></a></li>
-                <?php endif; ?>
-                <?php 
-                  if(!is_null($nextPostID)) : ?>
-                <li><?php echo '<a href=/test/blog/' . $nextPostID . "/" . $nextPostSlug . '>';?>Next: <?php echo $nextPostTitle ?></a></li>
-                <?php endif; ?>
-              </ul>
+              <div class="row">
+                <div class="col-md-6">
+                    <?php
+                      if(!is_null($prevPostID)) : ?>
+                    <p class="text-right"><b>Previous</b></p>                  
+                  <p class="text-right font-decorative"><b>
+                    <?php echo '<a href=/test/blog/' . $prevPostID . "/" . $prevPostSlug . '>';?><!--Previous:--><?php echo $prevPostTitle ?><br></a></b>
+                    <?php endif; ?>
+                  </p>
+                </div>
+                <div class="cold-md-6">
+                    <?php 
+                      if(!is_null($nextPostID)) : ?>
+                    <p class="text-left"><b>Next</b></p>                  
+                  <p class="text-left font-decorative"><b>
+                    <?php echo '<a href=/test/blog/' . $nextPostID . "/" . $nextPostSlug . '>';?><!--Next:--> <?php echo $nextPostTitle ?><br></a></b>
+                    <?php endif; ?>
+                  </p>
+                </div>
+              </div>
             </div>
             <div class="col-md-2 col-md-offset-1">
               <div class="blog-side text-center">

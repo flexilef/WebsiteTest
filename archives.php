@@ -1,21 +1,22 @@
-<!DOCTYPE html>
-
 <?php
+/*
+  This page is used to display individual blogposts. .htaccess file
+  rewrites links of blogposts to this page. .htaccess also feeds 
+  the get parameter to be used to get the selected blogpost.
+*/
 
-require_once('functions.php');
-require_once('classes/class.paginator.php');
-
-/****** Blogposts and pagination ******/
-$postsPerPage = 5;
-$GETParamName = 'p';
-$totalPosts = getTotalBlogpostsCount();
-
-$pages = new Paginator($postsPerPage, $GETParamName);
-$pages->setTotalItems($totalPosts);
-
-$offset = $pages->getItemsOffset();
-$blogposts = getRecentBlogposts($offset, $postsPerPage);
-
+  require_once('functions.php');
+  
+  if(!empty($_GET['month']) && !empty($_GET['year'])) {
+    $month = $_GET['month'];
+    $year = $_GET['year'];
+    
+    $dateStart = $year . '-' . $month . '-01 00:00:00';
+    $lastDayOfMonth = new DateTime( $year . '-' . $month . '-01' ); 
+    $dateEnd =  $year . '-' . $month . '-' . $lastDayOfMonth->format('t') . ' 23:59:59';
+    
+    $blogposts = getBlogpostsByDateRange($dateStart, $dateEnd);
+  }
 ?>
 
 <html>
@@ -29,7 +30,8 @@ $blogposts = getRecentBlogposts($offset, $postsPerPage);
     <link href="/test/site.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
+
   </head>
   <body>
     <div id="wrap">
@@ -55,7 +57,7 @@ $blogposts = getRecentBlogposts($offset, $postsPerPage);
           </div><!--/.nav-collapse -->
         </div>
       </div>
-      
+
       <!-- Web Banner -->
       <div class="container-fluid blog-banner text-center">
       </div>       
@@ -64,7 +66,7 @@ $blogposts = getRecentBlogposts($offset, $postsPerPage);
         <div class="page-content">
           <div class="row">
             <div class="col-md-8 col-md-offset-1">
-             <div class="blog-content">
+              <div class="blog-content">
                 <?php 
                 if(!empty($blogposts)) :
                   foreach($blogposts as $post) : 
@@ -100,15 +102,23 @@ $blogposts = getRecentBlogposts($offset, $postsPerPage);
                   <h1>No Blogposts Found!</h1>
                 <?php endif; ?>
               </div>
-              <div class="text-center">
-              <?php
-                echo $pages->createLinks('blog?', 2, 2);
-              ?>
-              </div>
             </div>
-            <div class="col-md-3 col-md-offset">
+            <div class="col-md-2 col-md-offset-1">
               <div class="blog-side text-center">
-                <?php require('sidebar.php'); ?>
+                <h4>Archives</h4>
+                <ol class="list-unstyled">
+                  <li>January <span class="badge">#</span></li>
+                  <li>February <span class="badge">#</span></li>
+                  <li>March <span class="badge">#</span></li>
+                  <li>April <span class="badge">#</span></li>
+                  <li>May <span class="badge">#</span></li>
+                  <li>June <span class="badge">#</span></li>
+                  <li>July <span class="badge">#</span></li>
+                  <li>August <span class="badge">#</span></li>
+                  <li>September <span class="badge">#</span></li>
+                  <li>November <span class="badge">#</span></li>
+                  <li>December <span class="badge">#</span></li>
+                </ol>
               </div>
             </div>
           </div> <!-- End row -->
@@ -119,10 +129,10 @@ $blogposts = getRecentBlogposts($offset, $postsPerPage);
     <div id="footer">
       <div class="container">
         <ul class="list-inline list-unstyled">
-          <li><a class="facebook expand" href="#"></a></li>
-          <li><a class="twitter expand" href="#"></a></li>                    
-          <li><a class="github expand" href="#"></a></li>
-        </ul>
+    <li><a class="facebook expand" href="#"></a></li>
+    <li><a class="twitter expand" href="#"></a></li>                    
+    <li><a class="github expand" href="#"></a></li>
+  </ul>
         <p class="text-muted">Copyright &copy 2015 Felix Lee </p>
       </div>
     </div>
@@ -131,6 +141,5 @@ $blogposts = getRecentBlogposts($offset, $postsPerPage);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="site.js"></script>
   </body>
 </html>

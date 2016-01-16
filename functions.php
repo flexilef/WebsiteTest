@@ -41,25 +41,6 @@ function getBlogposts($inID=null, $inTagID=null)
   return $postArray;
 }
 */
-function getBlogpostsRange($limitStart, $limitEnd) {
-  $db = new Database();
-  
-  $query = "SELECT * FROM blog_posts ORDER BY id DESC LIMIT $limitStart, $limitEnd";
-  
-  $rows = $db->select($query);
-  
-  $postArray = array();
-  
-  foreach($rows as $row) {
-    $myPost = new blogpost($row['id'], $row['title'], $row['title_slug'], $row['subtitle'], 
-                            $row['post'], $row['author_id'], $row['date_posted']);
-                            
-    array_push($postArray, $myPost);
-  }
-  
-  return $postArray;
-}
-
 function slug($text){ 
 
   // replace non letter or digits by -
@@ -84,7 +65,7 @@ function slug($text){
 
   return $text;
 }
-/******************************************/
+/*************GET BLOGPOSTS FUNCTIONS****************/
 
 function getBlogpostByID($id) {
   
@@ -169,42 +150,9 @@ function getRecentBlogposts($offset, $count) {
   
   return $postArray;
 }
-/*
-function getLatestBlogpost() {
-  $db = new Database();
-  
-  $query = "SELECT * FROM blog_posts ORDER BY date_posted DESC LIMIT 1";
-  $rows = $db->select($query);
-  
-  if(!empty($row)) {
-    $post = new Blogpost($rows[0]['id'], $rows[0]['title'], $rows[0]['title_slug'],
-                            $rows[0]['subtitle'], $rows[0]['post'], $rows[0]['author_id'], 
-                            $rows[0]['date_posted']);
-  }
-  else {
-    return null;
-  }
-  
-  return $post;
-}
 
-function getEarliestBlogpost() {
-  $db = new Database();
-  
-  $query = "SELECT * FROM blog_posts ORDER BY date_posted LIMIT 1";
-  $rows = $db->select($query);
-  
-  if(!empty($row)) {
-    $post = new Blogpost($rows[0]['id'], $rows[0]['title'], $rows[0]['title_slug'],
-                            $rows[0]['subtitle'], $rows[0]['post'], $rows[0]['author_id'], 
-                            $rows[0]['date_posted']);
-  }
-  else {
-    return null;
-  }
-  
-  return $post;
-}
+/*
+Returns the blogpost written (By DATETIME) before the blogpost with $currentID
 */
 function getPreviousBlogpost($currentID) {
   $db = new Database();
@@ -231,6 +179,9 @@ function getPreviousBlogpost($currentID) {
   return $previousPost;
 }
 
+/*
+Returns the blogpost written (By DATETIME) after the blogpost with $currentID
+*/
 function getNextBlogpost($currentID) {
   $db = new Database();
   
@@ -263,6 +214,45 @@ function getTotalBlogpostsCount() {
   
   return intval($row[0]['totalPosts']);
 }
+
+/*
+SELECT MONTH( date_posted ) AS 
+MONTH , YEAR( date_posted ) AS YEAR
+FROM  `blog_posts` 
+GROUP BY MONTH( date_posted ) , YEAR( date_posted ) 
+ORDER BY date_posted DESC 
+*/
+
+/* get the months and years of every blogpost no duplicates
+SELECT DISTINCT MONTH( date_posted ) AS 
+MONTH , YEAR( date_posted ) AS YEAR
+FROM blog_posts 
+ORDER BY date_posted DESC;
+*/
+
+/* get the number of posts per month-year
+SELECT COUNT( blog_posts.id ) AS numPosts
+FROM blog_posts
+GROUP BY MONTH( date_posted ) , YEAR( date_posted ) 
+ORDER BY date_posted DESC;
+*/
+
+/*********ARCHIVE FUNCTIONS**************/
+
+function getArchiveDates() {
+  $db = new Database();
+  
+  $query = "SELECT DISTINCT MONTH( date_posted ) AS "
+    . "postMonth , YEAR( date_posted ) AS postYear "
+    . "FROM blog_posts "
+    . "ORDER BY date_posted DESC";
+    
+  $dates = $db->select($query);
+  
+  return $dates;
+}
+
+/************HELPER FUNCTIONS***********************/
 
 /*
 returns a string (stripped of markup) of $wordLength from a blogpost with $postID

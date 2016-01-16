@@ -11,6 +11,9 @@ and open the template in the editor.
 html,
 body {
   height: 100%;
+  /*font-family: 'Open Sans', sans-serif;*/
+  font-family: 'Carrois Gothic', sans-serif;
+  font-size: 20px;
   /* The html and body elements cannot have any padding or margin. */
 }
 
@@ -35,8 +38,6 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
-/*Header code*/
-
 hr {
     border: none;
     height: 1px;
@@ -57,14 +58,43 @@ a:hover {
   color: lightsteelblue;
 }
 
+.translucent {
+  opacity: 0.7;
+}
+
+.font-anchor {
+  font-family: 'Carrois Gothic', sans-serif;
+  font-size: 20px;
+}
+
+.font-decorative {
+	font-family: 'Amatic SC', cursive;
+  font-size: 28px;
+}
+
+h1.font-decorative {
+	font-family: 'Amatic SC', cursive;
+  font-size: 48px;
+}
+
+h2.font-decorative {
+	font-family: 'Amatic SC', cursive;
+  font-size: 36px;
+}
+  
+/*Header code*/
+
+ul.nav > li > a,
+div.navbar-header >
+a.navbar-brand {
+  font-family: 'Amatic SC', cursive;
+  font-size: 28px;
+}
+
 .page-content 
 .thumbnail.dark,
 .img-thumbnail.dark {
   background-color: black;
-}
-
-.transparent {
-  opacity: 0.7;
 }
 
 /*Body code*/
@@ -81,18 +111,32 @@ a:hover {
 .container > 
 .page-header {
   //background-color: green;
+  font-family: 'Amatic SC', cursive;
   text-align: center;
 }
+
+#wrap > 
+.container > 
+.page-header h1{
+  font-size: 48px;
+}
+
+#wrap > 
+.container > 
+.page-header h2 {
+  font-size: 36px;
+}
+
 #wrap > 
 .container >
 .page-content {
   //background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5));
   //background-color: green;
   margin: 25px;
-  font-size: 16px;
   line-height: 150%;  
 }
 
+/*
 .jumbotron 
 h2, h3, h4 {
   margin-left: 24px;
@@ -115,6 +159,7 @@ h4{
   color: lightsteelblue;
   font-size: 1.125em;
 }
+*/
 
 .page-content > 
 .jumbotron {
@@ -128,6 +173,11 @@ h4{
 .blog-content {
   //background: lightgreen;
   margin: 10px;
+}
+
+.page-content
+.blog-content h1 > a {
+  font-size: 48px;
 }
 
 .page-content
@@ -159,7 +209,6 @@ div.blog-banner {
   justify-content: center; /* align horizontal */
   align-items: center; 
 }
-
 
 /*end blog page*/
 
@@ -263,7 +312,8 @@ a.projectD {
 }
 
 #footer > .container p {
-  //background-color: pink;
+  /*background-color: pink;*/
+  /*font-size: 14px;*/
   margin: 0;
   padding: 0;
 }
@@ -271,7 +321,7 @@ a.projectD {
 #footer > .container ul {  
   //background-color: blue;
   list-style-type: none;
-  margin: 16px;
+  margin: 16px 16px 0px 16px;
   padding: 0;
   text-align: center;
 }
