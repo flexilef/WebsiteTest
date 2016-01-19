@@ -18,12 +18,12 @@
       if(!isset($_GET[$this->instance])) {
         $this->currentPage = 1;
       }
+      else if($_GET[$this->instance] < 1) {
+        $this->currentPage = 1;
+      }
       else {
         $this->currentPage = (int)($_GET[$this->instance]);
       }
-      
-      if($this->currentPage == 0)
-        $this->currentPage = 1;
     }
     
     /*

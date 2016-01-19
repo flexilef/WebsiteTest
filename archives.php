@@ -6,7 +6,8 @@
 */
 
   require_once('functions.php');
-  
+  require_once('classes/class.paginator.php');
+
   if(!empty($_GET['month']) && !empty($_GET['year'])) {
     $month = $_GET['month'];
     $year = $_GET['year'];
@@ -16,10 +17,21 @@
     $dateEnd =  $year . '-' . $month . '-' . $lastDayOfMonth->format('t') . ' 23:59:59';
     
     $blogposts = getBlogpostsByDateRange($dateStart, $dateEnd);
+    
+    /**** Pagination ***/
+    $postsPerPage = 5;
+    $GETparameter = 'p';
+    $totalPosts = count($blogposts);
+    
+    $pages = new Paginator($postsPerPage, $GETparameter);
+    $pages->setTotalItems($totalPosts);
+    
+    $startBlogpostsIndex = $pages->getItemsOffset();
+    $endBlogpostsIndex = $postsPerPage+$startBlogpostsIndex;
   }
   else {
     header('HTTP/1.0 404 Not Found', true, 404);
-    include('error404.html');
+    require('error404.html');
     exit();
   }
 ?>
@@ -74,15 +86,15 @@
               <div class="blog-content">
                 <?php 
                 if(!empty($blogposts)) :
-                  foreach($blogposts as $post) : 
-                    $postID = $post->getID();
-                    $postTitle = $post->getTitle();
-                    $postSubtitle = $post->getSubtitle();
-                    $postSlug = $post->getTitleSlug();
-                    $postAuthor = $post->getAuthor();
-                    $postTags = $post->getTags();
-                    $postDate = date('M jS Y - H:i:s', strtotime($post->getDatePosted()));
-                    $postExcerpt = getPostExcerpt($postID, 45); 
+                  for($i=$startBlogpostsIndex; $i<$endBlogpostsIndex && $i<$totalPosts; $i++) :
+                    $postID = $blogposts[$i]->getID();
+                    $postTitle = $blogposts[$i]->getTitle();
+                    $postSubtitle = $blogposts[$i]->getSubtitle();
+                    $postSlug = $blogposts[$i]->getTitleSlug();
+                    $postAuthor = $blogposts[$i]->getAuthor();
+                    $postTags = $blogposts[$i]->getTags();
+                    $postDate = date('M jS Y - H:i:s', strtotime($blogposts[$i]->getDatePosted()));
+                    $postExcerpt = getPostExcerpt($postID, 45);
                 ?>
                   <h1 class="font-decorative"> <!-- title/subtitle -->
                     <a href="<?php echo "/test/blog/" . $postID . "/" . $postSlug ?>">
@@ -94,9 +106,11 @@
                     <?php echo $postDate ?>
                     <span class="glyphicon glyphicon-user"></span>
                     <?php echo $postAuthor ?>
+                    
+                    <?php if(!empty($postTags)) : ?>
                     <span class="glyphicon glyphicon-tags"></span>
                     <?php foreach($postTags as $tag) :
-                      echo $tag . " "; endforeach; ?>
+                      echo $tag . " "; endforeach; endif; ?>
                   </p>
                   <p> <!-- post description -->
                     <?php echo $postExcerpt . '...'; ?> 
@@ -106,10 +120,13 @@
                     $postSlug ?>">Read More</a>
                   </p>
                   <hr>
-                <?php endforeach; 
+                <?php endfor;
                   else : ?>
                   <h1>No Blogposts Found!</h1>
                 <?php endif; ?>
+              </div>
+              <div class="text-center">
+                <?php echo $pages->createLinks("$_GET[month]-$_GET[year]?", 2, 2); ?>
               </div>
             </div>
             <div class="col-md-2 col-md-offset-1">

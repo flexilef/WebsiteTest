@@ -38,13 +38,13 @@
     }
     else {
        header('HTTP/1.0 400 Bad Request', true, 400);
-       include('error400.html');
+       require('error400.html');
        exit();
     }
   }
   else {
     header('HTTP/1.0 404 Not Found', true, 404);
-    include('error404.html');
+    require('error404.html');
     exit();
   }
 ?>

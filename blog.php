@@ -5,19 +5,16 @@
 require_once('functions.php');
 require_once('classes/class.paginator.php');
 
-/****** Blogposts and pagination ******/
-$postsPerPage = 5;
-$GETParamName = 'p';
-$totalPosts = getTotalBlogpostsCount();
+  $postsPerPage = 5;
+  $GETParamName = 'p';
+  $totalPosts = getTotalBlogpostsCount();
 
-$pages = new Paginator($postsPerPage, $GETParamName);
-$pages->setTotalItems($totalPosts);
+  $pages = new Paginator($postsPerPage, $GETParamName);
+  $pages->setTotalItems($totalPosts);
 
-$offset = $pages->getItemsOffset();
-$blogposts = getRecentBlogposts($offset, $postsPerPage);
+  $offset = $pages->getItemsOffset();
+  $blogposts = getRecentBlogposts($offset, $postsPerPage);
 
-$posttest = getBlogpostByID(100);
-var_dump($posttest->getTags());
 ?>
 
 <html>
@@ -89,9 +86,10 @@ var_dump($posttest->getTags());
                     <?php echo $postDate ?>
                     <span class="glyphicon glyphicon-user"></span>
                     <?php echo $postAuthor ?>
+                    <?php if(!empty($postTags)) : ?>
                     <span class="glyphicon glyphicon-tags"></span>
                     <?php foreach($postTags as $tag) :
-                      echo $tag . " "; endforeach; ?>
+                      echo $tag . " "; endforeach; endif; ?>
                   </p>
                   <p> <!-- post description -->
                     <?php echo $postExcerpt . '...'; ?> 
@@ -107,9 +105,7 @@ var_dump($posttest->getTags());
                 <?php endif; ?>
               </div>
               <div class="text-center">
-              <?php
-                echo $pages->createLinks('blog?', 2, 2);
-              ?>
+                <?php echo $pages->createLinks('blog?', 2, 2); ?>
               </div>
             </div>
             <div class="col-md-3 col-md-offset">
