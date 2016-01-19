@@ -16,6 +16,8 @@ $pages->setTotalItems($totalPosts);
 $offset = $pages->getItemsOffset();
 $blogposts = getRecentBlogposts($offset, $postsPerPage);
 
+$posttest = getBlogpostByID(100);
+var_dump($posttest->getTags());
 ?>
 
 <html>
@@ -73,8 +75,9 @@ $blogposts = getRecentBlogposts($offset, $postsPerPage);
                     $postSubtitle = $post->getSubtitle();
                     $postSlug = $post->getTitleSlug();
                     $postAuthor = $post->getAuthor();
+                    $postTags = $post->getTags();
                     $postDate = date('M jS Y - H:i:s', strtotime($post->getDatePosted()));
-                    $postExcerpt = getPostExcerpt($postID, 45); 
+                    $postExcerpt = getPostExcerpt($postID, 45);
                 ?>
                   <h1 class="font-decorative"> <!-- title/subtitle -->
                     <a href="<?php echo "/test/blog/" . $postID . "/" . $postSlug ?>">
@@ -86,6 +89,9 @@ $blogposts = getRecentBlogposts($offset, $postsPerPage);
                     <?php echo $postDate ?>
                     <span class="glyphicon glyphicon-user"></span>
                     <?php echo $postAuthor ?>
+                    <span class="glyphicon glyphicon-tags"></span>
+                    <?php foreach($postTags as $tag) :
+                      echo $tag . " "; endforeach; ?>
                   </p>
                   <p> <!-- post description -->
                     <?php echo $postExcerpt . '...'; ?> 

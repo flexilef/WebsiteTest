@@ -9,9 +9,9 @@ class Blogpost
   private $subtitle;
   private $post;
   private $author;
-  private $tags;
   private $datePosted;
-  
+  private $tags = array();
+
   private $connection;
 
   function __construct($inID=null, $inTitle=null, $inSlug=null, $inSubtitle=null, 
@@ -19,28 +19,37 @@ class Blogpost
   {
     $db = new Database();
 
-    if(!empty($inID))
-    {
+    if(!empty($inID)) {
       $this->id = $inID;
-    } 
+      
+      //setup tags
+      $query = "SELECT name FROM tags WHERE id IN (
+        SELECT tag_id
+        FROM blog_post_tags
+        WHERE blog_post_id = $inID);";
+        
+      $rows = $db->select($query);
+
+      if(!empty($rows)) {
+        foreach($rows as $row) {
+          array_push($this->tags, $row['name']);
+        }
+      }
+    }
   
-    if(!empty($inTitle))
-    { 
+    if(!empty($inTitle)) { 
       $this->title = $inTitle;
     }
       
-    if(!empty($inSlug))
-    { 
+    if(!empty($inSlug)) { 
       $this->titleSlug = $inSlug;
     }
     
-    if(!empty($inSubtitle))
-    {
+    if(!empty($inSubtitle)) {
       $this->subtitle = $inSubtitle;
     }
 
-    if(!empty($inPost))
-    {
+    if(!empty($inPost)) {
       $this->post = $inPost;
     }
 
@@ -51,7 +60,6 @@ class Blogpost
       $params = array($inAuthorID);
       $row = $db->select($query, $params);
       
-      //$row[0][] because we know we only return one row (unique author id)
       $this->author = $row[0]['first_name'] . " " . $row[0]['last_name'];
     }
 
@@ -63,6 +71,7 @@ class Blogpost
     }
     
     //fix the following to use prepared statements
+    /*
     $postTags = "No Tags";
     if(!empty($inId))
     { 
@@ -101,6 +110,7 @@ class Blogpost
       }
       $this->tags = $postTags;
     }
+    */
   }
   
   function getID() {

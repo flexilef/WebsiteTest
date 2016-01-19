@@ -126,20 +126,7 @@
             </div>
             <div class="col-md-2 col-md-offset-1">
               <div class="blog-side text-center">
-                <h4>Archives</h4>
-                <ol class="list-unstyled">
-                  <li>January <span class="badge">#</span></li>
-                  <li>February <span class="badge">#</span></li>
-                  <li>March <span class="badge">#</span></li>
-                  <li>April <span class="badge">#</span></li>
-                  <li>May <span class="badge">#</span></li>
-                  <li>June <span class="badge">#</span></li>
-                  <li>July <span class="badge">#</span></li>
-                  <li>August <span class="badge">#</span></li>
-                  <li>September <span class="badge">#</span></li>
-                  <li>November <span class="badge">#</span></li>
-                  <li>December <span class="badge">#</span></li>
-                </ol>
+                <?php require('sidebar.php'); ?>
               </div>
             </div>
           </div> <!-- End row -->

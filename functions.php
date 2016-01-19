@@ -98,7 +98,7 @@ function getBlogpostByID($id) {
 function getBlogpostsByDateRange($startDate, $endDate) {
   $db = new Database();
 
-  $query = "SELECT * FROM blog_posts WHERE date_posted BETWEEN ? AND ?";
+  $query = "SELECT * FROM blog_posts WHERE date_posted BETWEEN ? AND ? ORDER BY date_posted";
   
   $params = array($startDate, $endDate);
   $rows = $db->select($query, $params);

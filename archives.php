@@ -17,6 +17,11 @@
     
     $blogposts = getBlogpostsByDateRange($dateStart, $dateEnd);
   }
+  else {
+    header('HTTP/1.0 404 Not Found', true, 404);
+    include('error404.html');
+    exit();
+  }
 ?>
 
 <html>
@@ -75,6 +80,7 @@
                     $postSubtitle = $post->getSubtitle();
                     $postSlug = $post->getTitleSlug();
                     $postAuthor = $post->getAuthor();
+                    $postTags = $post->getTags();
                     $postDate = date('M jS Y - H:i:s', strtotime($post->getDatePosted()));
                     $postExcerpt = getPostExcerpt($postID, 45); 
                 ?>
@@ -88,6 +94,9 @@
                     <?php echo $postDate ?>
                     <span class="glyphicon glyphicon-user"></span>
                     <?php echo $postAuthor ?>
+                    <span class="glyphicon glyphicon-tags"></span>
+                    <?php foreach($postTags as $tag) :
+                      echo $tag . " "; endforeach; ?>
                   </p>
                   <p> <!-- post description -->
                     <?php echo $postExcerpt . '...'; ?> 
@@ -105,20 +114,7 @@
             </div>
             <div class="col-md-2 col-md-offset-1">
               <div class="blog-side text-center">
-                <h4>Archives</h4>
-                <ol class="list-unstyled">
-                  <li>January <span class="badge">#</span></li>
-                  <li>February <span class="badge">#</span></li>
-                  <li>March <span class="badge">#</span></li>
-                  <li>April <span class="badge">#</span></li>
-                  <li>May <span class="badge">#</span></li>
-                  <li>June <span class="badge">#</span></li>
-                  <li>July <span class="badge">#</span></li>
-                  <li>August <span class="badge">#</span></li>
-                  <li>September <span class="badge">#</span></li>
-                  <li>November <span class="badge">#</span></li>
-                  <li>December <span class="badge">#</span></li>
-                </ol>
+                <?php require('sidebar.php'); ?>
               </div>
             </div>
           </div> <!-- End row -->
