@@ -1,20 +1,34 @@
-<!DOCTYPE html>
-
 <?php
+/*
+  This page is used to display individual blogposts. .htaccess file
+  rewrites links of blogposts to this page. .htaccess also feeds 
+  the get parameter to be used to get the selected blogpost.
+*/
 
-require_once('functions.php');
-require_once('classes/class.paginator.php');
+  require_once('functions.php');
+  require_once('classes/class.paginator.php');
 
-  $postsPerPage = 5;
-  $GETParamName = 'p';
-  $totalPosts = getTotalBlogpostsCount();
+  if(!empty($_GET['tagname'])) {
+    $tag = $_GET['tagname'];
+    
+    $blogposts = getBlogpostsByTag($tag);
 
-  $pages = new Paginator($postsPerPage, $GETParamName);
-  $pages->setTotalItems($totalPosts);
-
-  $offset = $pages->getItemsOffset();
-  $blogposts = getRecentBlogposts($offset, $postsPerPage);
-
+    /**** Pagination ***/
+    $postsPerPage = 5;
+    $GETparameter = 'p';
+    $totalPosts = count($blogposts);
+    
+    $pages = new Paginator($postsPerPage, $GETparameter);
+    $pages->setTotalItems($totalPosts);
+    
+    $startBlogpostsIndex = $pages->getItemsOffset();
+    $endBlogpostsIndex = $postsPerPage+$startBlogpostsIndex;
+  }
+  else {
+    header('HTTP/1.0 404 Not Found', true, 404);
+    require('error404.html');
+    exit();
+  }
 ?>
 
 <html>
@@ -28,7 +42,8 @@ require_once('classes/class.paginator.php');
     <link href="/test/site.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
+
   </head>
   <body>
     <div id="wrap">
@@ -54,7 +69,7 @@ require_once('classes/class.paginator.php');
           </div><!--/.nav-collapse -->
         </div>
       </div>
-      
+
       <!-- Web Banner -->
       <div class="container-fluid blog-banner text-center">
       </div>       
@@ -63,17 +78,17 @@ require_once('classes/class.paginator.php');
         <div class="page-content">
           <div class="row">
             <div class="col-md-8 col-md-offset-1">
-             <div class="blog-content">
+              <div class="blog-content">
                 <?php 
                 if(!empty($blogposts)) :
-                  foreach($blogposts as $post) : 
-                    $postID = $post->getID();
-                    $postTitle = $post->getTitle();
-                    $postSubtitle = $post->getSubtitle();
-                    $postSlug = $post->getTitleSlug();
-                    $postAuthor = $post->getAuthor();
-                    $postTags = $post->getTags();
-                    $postDate = date('M jS Y - H:i:s', strtotime($post->getDatePosted()));
+                  for($i=$startBlogpostsIndex; $i<$endBlogpostsIndex && $i<$totalPosts; $i++) :
+                    $postID = $blogposts[$i]->getID();
+                    $postTitle = $blogposts[$i]->getTitle();
+                    $postSubtitle = $blogposts[$i]->getSubtitle();
+                    $postSlug = $blogposts[$i]->getTitleSlug();
+                    $postAuthor = $blogposts[$i]->getAuthor();
+                    $postTags = $blogposts[$i]->getTags();
+                    $postDate = date('M jS Y - H:i:s', strtotime($blogposts[$i]->getDatePosted()));
                     $postExcerpt = getPostExcerpt($postID, 45);
                 ?>
                   <h1 class="font-decorative"> <!-- title/subtitle -->
@@ -86,6 +101,7 @@ require_once('classes/class.paginator.php');
                     <?php echo $postDate ?>
                     <span class="glyphicon glyphicon-user"></span>
                     <?php echo $postAuthor ?>
+                    
                     <?php if(!empty($postTags)) : ?>
                     <span class="glyphicon glyphicon-tags"></span>
                     <?php foreach($postTags as $tag) :
@@ -93,18 +109,19 @@ require_once('classes/class.paginator.php');
                   </p>
                   <p> <!-- post description -->
                     <?php echo $postExcerpt . '...'; ?> 
-                    <!-- Read more button-->
-                    <b class="font-decorative"><a href="<?php echo "/test/blog/" . $postID . "/" . 
-                    $postSlug ?>">&lt; Read More &gt;</a></b>
+                  </p>
+                  <p> <!-- Read more button-->
+                    <a class="btn btn-primary" href="<?php echo "/test/blog/" . $postID . "/" . 
+                    $postSlug ?>">Read More</a>
                   </p>
                   <hr>
-                <?php endforeach; 
+                <?php endfor;
                   else : ?>
                   <h1>No Blogposts Found!</h1>
                 <?php endif; ?>
               </div>
               <div class="text-center">
-                <?php echo $pages->createLinks('blog?', 2, 2); ?>
+                <?php echo $pages->createLinks("$_GET[tagname]?", 2, 2); ?>
               </div>
             </div>
             <div class="col-md-2 col-md-offset-1">
@@ -120,10 +137,10 @@ require_once('classes/class.paginator.php');
     <div id="footer">
       <div class="container">
         <ul class="list-inline list-unstyled">
-          <li><a class="facebook expand" href="#"></a></li>
-          <li><a class="twitter expand" href="#"></a></li>                    
-          <li><a class="github expand" href="#"></a></li>
-        </ul>
+    <li><a class="facebook expand" href="#"></a></li>
+    <li><a class="twitter expand" href="#"></a></li>                    
+    <li><a class="github expand" href="#"></a></li>
+  </ul>
         <p class="text-muted">Copyright &copy 2015 Felix Lee </p>
       </div>
     </div>
@@ -132,6 +149,5 @@ require_once('classes/class.paginator.php');
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="site.js"></script>
   </body>
 </html>

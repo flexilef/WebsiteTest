@@ -63,54 +63,9 @@ class Blogpost
       $this->author = $row[0]['first_name'] . " " . $row[0]['last_name'];
     }
 
-    if(!empty($inDatePosted))  
-    {
-      //$splitDate = explode("-", $inDatePosted);
-      //$this->datePosted = $splitDate[1] . "/" . $splitDate[2] . "/" . $splitDate[0];
+    if(!empty($inDatePosted)) {
       $this->datePosted = $inDatePosted;
     }
-    
-    //fix the following to use prepared statements
-    /*
-    $postTags = "No Tags";
-    if(!empty($inId))
-    { 
-      $tagArray = array();
-      $tagIDArray = array();
-
-      $query = "SELECT tags.*
-       FROM blog_post_tags
-       LEFT JOIN (tags)
-       ON (blog_post_tags.tag_id = tags.id) 
-       WHERE blog_post_tags.blog_post_id = " . $inId;
-      
-      $rows = $db->select($query);
-      
-      if($rows) {
-        foreach($rows as $row)
-        {
-          array_push($tagArray, $row["name"]);
-          array_push($tagIDArray, $row["id"]);
-        }
-      }
-      
-      if(sizeof($tagArray) > 0)
-      {
-        foreach($tagArray as $tag)
-        {
-          if($postTags == "No Tags")
-          {
-            $postTags = $tag;
-          }
-          else
-          {
-            $postTags = $postTags . "," . $tag;
-          }
-        }
-      }
-      $this->tags = $postTags;
-    }
-    */
   }
   
   function getID() {

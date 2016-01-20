@@ -1,6 +1,20 @@
 <?php
+
+  require_once('functions.php');
+  
   $dates = getArchiveDates();
+  $tags = getAllTags();
 ?>
+
+<h1 class="font-decorative"><b>Tags</b></h1>
+<ul class="list-inline">
+  <?php foreach($tags as $tag) : ?>
+    <li>
+      <b><a class="font-decorative" href="/test/blog/tags/<?php echo $tag['name_slug']; ?> ">
+      <?php echo $tag['name']; ?></a></b>
+    </li>
+  <?php endforeach; ?>
+</ul>
 
 <h1 class="font-decorative"><b>Archives</b></h1>
 <ol class="list-unstyled">

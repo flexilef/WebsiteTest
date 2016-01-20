@@ -8,7 +8,7 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d [NC]
 RewriteCond %{REQUEST_FILENAME} !-f [NC]
 
-RewriteCond %{QUERY_STRING} ^p=([1-9]+)$$
+RewriteCond %{QUERY_STRING} ^p=([1-9]+)$
 RewriteRule ^blog$ blog.php?p=%1 [L]
 RewriteRule ^blog$ blog.php
 
@@ -17,3 +17,8 @@ RewriteRule ^blog/(\d+)/?(.*)$ viewpost.php?id=$1
 RewriteCond %{QUERY_STRING} ^p=([1-9]+)$
 RewriteRule ^blog/archives/(0[1-9]|[1-9]|1[0-2])-(\d{4})$ archives.php?month=$1&year=$2&p=%1 [L]
 RewriteRule ^blog/archives/(0[1-9]|[1-9]|1[0-2])-(\d{4})$ archives.php?month=$1&year=$2
+
+RewriteCond %{QUERY_STRING} ^p=([1-9]+)$
+RewriteRule ^blog/tags/([a-zA-Z]+) tags.php?tagname=$1&p=%1 [L]
+RewriteRule ^blog/tags/([a-zA-Z]+) tags.php?tagname=$1
+

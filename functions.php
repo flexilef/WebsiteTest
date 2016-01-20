@@ -89,6 +89,34 @@ function getBlogpostByID($id) {
   return $post;
 }
 
+function getBlogpostsByTag($tagName) {
+  $db = new Database();
+  
+  $query = "SELECT blog_posts.* FROM blog_posts "
+    . "JOIN blog_post_tags "
+    . "ON blog_posts.id = blog_post_id "
+    . "WHERE blog_post_tags.tag_id IN "
+    . " (SELECT tags.id "
+    . " FROM tags"
+    . " WHERE tags.name_slug = ?)";
+    
+  $params = array($tagName);
+  $rows = $db->select($query, $params);
+  
+  $postArray = array();
+  if(!empty($rows)) {
+    foreach($rows as $row) {
+      $post = new Blogpost($row['id'], $row['title'], $row['title_slug'],
+                            $row['subtitle'], $row['post'], $row['author_id'], 
+                            $row['date_posted']);
+                            
+      array_push($postArray, $post);
+    }
+  }
+  
+  return $postArray;
+}
+
 /*
 *$startDate is a DATETIME
 *$endDate is a DATETIME
@@ -215,29 +243,7 @@ function getTotalBlogpostsCount() {
   return intval($row[0]['totalPosts']);
 }
 
-/*
-SELECT MONTH( date_posted ) AS 
-MONTH , YEAR( date_posted ) AS YEAR
-FROM  `blog_posts` 
-GROUP BY MONTH( date_posted ) , YEAR( date_posted ) 
-ORDER BY date_posted DESC 
-*/
-
-/* get the months and years of every blogpost no duplicates
-SELECT DISTINCT MONTH( date_posted ) AS 
-MONTH , YEAR( date_posted ) AS YEAR
-FROM blog_posts 
-ORDER BY date_posted DESC;
-*/
-
-/* get the number of posts per month-year
-SELECT COUNT( blog_posts.id ) AS numPosts
-FROM blog_posts
-GROUP BY MONTH( date_posted ) , YEAR( date_posted ) 
-ORDER BY date_posted DESC;
-*/
-
-/*********ARCHIVE FUNCTIONS**************/
+/*********SIDEBAR FUNCTIONS**************/
 
 function getArchiveDates() {
   $db = new Database();
@@ -250,6 +256,15 @@ function getArchiveDates() {
   $dates = $db->select($query);
   
   return $dates;
+}
+
+function getAllTags() {
+  $db = new Database();
+  
+  $query = "SELECT tags.name, tags.name_slug FROM tags";
+  $tags = $db->select($query);
+
+  return $tags;
 }
 
 /************HELPER FUNCTIONS***********************/
