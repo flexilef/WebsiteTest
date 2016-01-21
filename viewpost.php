@@ -103,17 +103,8 @@
                   <?php echo $blogpostPost . " postID: " . $currentPostID ;?>
                 </p>
               </div>
-              <div class="row">
-                <div class="col-md-6">
-                    <?php
-                      if(!is_null($prevPostID)) : ?>
-                    <p class="text-right"><b>Previous</b></p>                  
-                  <p class="text-right font-decorative"><b>
-                    <?php echo '<a href=/test/blog/' . $prevPostID . "/" . $prevPostSlug . '>';?><!--Previous:--><?php echo $prevPostTitle ?><br></a></b>
-                    <?php endif; ?>
-                  </p>
-                </div>
-                <div class="cold-md-6">
+              <div class="row">                
+                <div class="col-md-6 col-md-push-6">
                     <?php 
                       if(!is_null($nextPostID)) : ?>
                     <p class="text-left"><b>Next</b></p>                  
@@ -122,7 +113,34 @@
                     <?php endif; ?>
                   </p>
                 </div>
+                <div class="col-md-6 col-md-pull-6">
+                    <?php
+                      if(!is_null($prevPostID)) : ?>
+                    <p class="text-right"><b>Previous</b></p>                  
+                  <p class="text-right font-decorative"><b>
+                    <?php echo '<a href=/test/blog/' . $prevPostID . "/" . $prevPostSlug . '>';?><!--Previous:--><?php echo $prevPostTitle ?><br></a></b>
+                    <?php endif; ?>
+                  </p>
+                </div>
               </div>
+              <hr>
+              <div class="row">
+                <div class="col-md-12">
+                  <div id="disqus_loader">
+                    <button class="btn btn-default show-comments>" type="button"
+                        onclick='$.ajaxSetup({cache: true});
+                        $.getScript("http://flexilef.disqus.com/embed.js");
+                        $.ajaxSetup({cache: false});
+                        $("#disqus_loader").remove();'>
+                      Display Discussion
+                  <span class="glyphicon glyphicon-chevron-down glyph-center"></span>
+                    </button>
+                  </div>
+                  <div id="disqus_thread"></div> <!--Insert this to open Disqus -->
+                </div>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+              </div>
+              <hr>
             </div>
             <div class="col-md-2 col-md-offset-1">
               <div class="blog-side text-center">
@@ -130,23 +148,6 @@
               </div>
             </div>
           </div> <!-- End row -->
-          <div class="row">
-            <div class="col-md-8 col-md-offset-1">
-              <div id="disqus_loader">
-                <button class="btn btn-default show-comments" type="button"
-                        onclick='$.ajaxSetup({cache: true});
-          $.getScript("http://flexilef.disqus.com/embed.js");
-          $.ajaxSetup({cache: false});
-          $("#disqus_loader").remove();'>
-                  Display Discussion
-                  <span class="glyphicon glyphicon-chevron-down glyph-center"></span>
-                </button>
-              </div>
-              <div id="disqus_thread"></div> <!--Insert this to open Disqus -->
-            </div>
-
-            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-          </div>
         </div>
       </div>
     </div>

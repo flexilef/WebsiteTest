@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-
 <?php
-
-require_once('functions.php');
-require_once('classes/class.paginator.php');
+  require_once 'includes/config.php';
+  require_once 'functions.php';
 
   $postsPerPage = 5;
   $GETParamName = 'p';
@@ -14,9 +11,9 @@ require_once('classes/class.paginator.php');
 
   $offset = $pages->getItemsOffset();
   $blogposts = getRecentBlogposts($offset, $postsPerPage);
-
 ?>
 
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">

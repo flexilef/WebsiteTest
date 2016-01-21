@@ -11,7 +11,7 @@ class Database {
   public function connect() {
       
     if(!isset(self::$connection)) {
-      $config = parse_ini_file('../../config.ini');
+      $config = parse_ini_file('/home/bleeping/config.ini');
       
       $host = 'localhost';
       $username = $config['username'];

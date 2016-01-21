@@ -108,11 +108,10 @@
                       echo $tag . " "; endforeach; endif; ?>
                   </p>
                   <p> <!-- post description -->
-                    <?php echo $postExcerpt . '...'; ?> 
-                  </p>
-                  <p> <!-- Read more button-->
-                    <a class="btn btn-primary" href="<?php echo "/test/blog/" . $postID . "/" . 
-                    $postSlug ?>">Read More</a>
+                    <?php echo $postExcerpt . '...'; ?>
+                    <!-- Read more button-->
+                    <b class="font-decorative"><a href="<?php echo "/test/blog/" . $postID . "/" . 
+                    $postSlug ?>">&lt; Read More &gt;</a></b>
                   </p>
                   <hr>
                 <?php endfor;
