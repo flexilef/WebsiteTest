@@ -5,7 +5,7 @@
   the get parameter to be used to get the selected blogpost.
 */
 
-  require_once('functions.php');
+  require_once 'includes/functions.php';
   
   if(!empty($_GET['id'])) {
     

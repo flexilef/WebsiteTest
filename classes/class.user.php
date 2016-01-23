@@ -3,7 +3,7 @@ require_once(realpath(__DIR__ . '/../includes/config.php'));
 
 class User {
   
-  public function is_logged_in() {
+  public function isLoggedIn() {
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
       return true;
     }
@@ -11,9 +11,9 @@ class User {
   
   public function login($username, $password) {
     
-    $hashed = $this->get_user_hash($username);
+    $passwordHash = $this->getUserHash($username);
     
-    if($this->verify_hash($password, $hashed) == 1) {
+    if($this->verifyHash($password, $passwordHash) == 1) {
       
       $_SESSION['loggedin'] = true;
       return true;
@@ -24,17 +24,18 @@ class User {
     session_destroy();
   }
   
-  public function create_hash($value) {
-    return $hash = crypt($value, '$2a$12'.substr(str_replace('+', '.', base64_encode(sha1(microtime(true), true))), 0, 22));
+  public function createHash($value) {
+    
+    return $hash = password_hash($value, PASSWORD_DEFAULT);
+    //return $hash = crypt($value, '$2a$12'.substr(str_replace('+', '.', //base64_encode(sha1(microtime(true), true))), 0, 22));
   }
 
-  private function verify_hash($password, $hash) {
-    return $hash == crypt($password, $hash);
+  private function verifyHash($password, $hash) {
+    return password_verify($password, $hash);
   } 
   
-  private function get_user_hash($username) {
+  private function getUserHash($username) {
     try {
-      
       $db = new Database();
       
       $query = 'SELECT password '

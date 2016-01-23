@@ -5,8 +5,8 @@
   the get parameter to be used to get the selected blogpost.
 */
 
-  require_once('functions.php');
-  require_once('classes/class.paginator.php');
+  require_once 'includes/functions.php';
+  require_once 'includes/config.php';
 
   if(!empty($_GET['month']) && !empty($_GET['year'])) {
     $month = $_GET['month'];
