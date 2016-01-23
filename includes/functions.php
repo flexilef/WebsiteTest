@@ -1,46 +1,6 @@
 <?php
-require_once('classes/class.blogpost.php');
+require_once realpath(__DIR__ . '/../classes/class.blogpost.php');
 
-/*
-function getBlogposts($inID=null, $inTagID=null) 
-{
-  $db = new database();
-
-  if(!empty($inID)) 
-  {
-    $query = "SELECT * FROM blog_posts WHERE id = ? ORDER BY id DESC"; 
-    
-    $params = array($inID);
-    $rows = $db->select($query, $params);
-  }
-  else if(!empty($inTagID)) 
-  {
-    $query = "SELECT blog_posts.* FROM blog_post_tags "
-    . "LEFT JOIN (blog_posts) ON (blog_post_tags.blog_post_id = blog_posts.id) "
-    . "WHERE blog_post_tags.tag_id = ? ORDER BY blog_posts.id DESC";
-    
-    $params = array($tagID);
-    $rows = $db->select($query, $params);
-  }
-  else 
-  {
-    $query = "SELECT * FROM blog_posts ORDER BY id DESC";
-    $rows = $db->select($query);
-  }
-  
-  $postArray = array();
-  
-  foreach($rows as $row)
-  {
-      $myPost = new blogpost($row['id'], $row['title'], $row['title_slug'], $row['subtitle'], 
-                            $row['post'], $row['author_id'], $row['date_posted']);
-                            
-      array_push($postArray, $myPost);
-  }
-  
-  return $postArray;
-}
-*/
 function slug($text){ 
 
   // replace non letter or digits by -

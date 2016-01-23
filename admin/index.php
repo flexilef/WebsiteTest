@@ -1,6 +1,7 @@
 <?php
   require_once '../includes/config.php';
-  
+  require_once '../includes/functions.php';
+
   $db = new Database();
   $conn = $db->connect();
   
@@ -38,44 +39,65 @@
     <link href='https://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <?php require 'menu.php'; ?>
-    <table>
-    <tr>
-      <th>Title</th>
-      <th>Date</th>
-      <th>Action</th>
-    </tr>
+    <div id="wrap">
+      <div class="container">
+        <?php require 'menu.php'; ?>
+        
+        <p class="text-right"><a href='addpost.php'><span class="glyphicon glyphicon-plus"></span>Add Post</a></p>
+        <table class="table table-striped table-bordered">
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
 
-<?php
-  try {
-    $query = 'SELECT id, title, date_posted '
-    . 'FROM blog_posts '
-    . 'ORDER BY date_posted DESC';
+        <?php
+          try {
+            $postsPerPage = 25;
+            $GETParamName = 'p';
+            $totalPosts = getTotalBlogpostsCount();
 
-    $rows = $db->select($query);
-    
-    foreach($rows as $row) :
-      echo '<tr>';
-      echo '<td>' .$row['title'] .'</td>';
-      echo '<td>' .date('M jS Y | H:i:s', strtotime($row['date_posted']));
-      ?>
-      
-    <td>
-      <a href="editpost.php?id=<?php echo $row['id'];?>">Edit</a> |
-      <a href="javascript:delpost('<?php echo $row['id'];?>','<?php echo $row['title'];?>')">Delete</a>
-    </td>
-    
-    <?php
-      echo '</tr>';
-      endforeach;
-  }
-  catch(PDOException $e) {
-    echo $e->getMessage();
-  } ?>
-    </table>
-    
-    <p><a href='addpost.php'>Add Post</a></p>
-    
+            $pages = new Paginator($postsPerPage, $GETParamName);
+            $pages->setTotalItems($totalPosts);
+
+            $offset = $pages->getItemsOffset();
+            
+            $query = 'SELECT id, title, date_posted '
+            . 'FROM blog_posts '
+            . 'ORDER BY date_posted DESC '
+            . 'LIMIT :offset, :count';
+            
+            $params = array($offset, $postsPerPage);
+            $stmt = $conn->prepare($query);
+            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+            $stmt->bindValue(':count', $postsPerPage, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            $rows = $stmt->fetchAll();
+            
+            foreach($rows as $row) :
+              echo '<tr>';
+              echo '<td>' . mb_strimwidth($row['title'], 0, 45, "...") .'</td>';
+              echo '<td>' .date('M jS Y | H:i:s', strtotime($row['date_posted']));
+              ?>
+              
+            <td>
+              <a href="editpost.php?id=<?php echo $row['id'];?>">Edit</a> |
+              <a href="javascript:delpost('<?php echo $row['id'];?>','<?php echo $row['title'];?>')">Delete</a>
+            </td>
+            
+            <?php
+              echo '</tr>';
+              endforeach;
+          }
+          catch(PDOException $e) {
+            echo $e->getMessage();
+          } ?>
+        </table>
+        
+        <?php echo $pages->createLinks('./?', 2, 2); ?>
+      </div>
+    </div>
     <script language="Javascrip" type="text/javascript">
     function delpost(id, title) {
       if(confirm("Are you sure you want to delete '" + title + "'")) {

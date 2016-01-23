@@ -89,6 +89,7 @@ div.navbar-header >
 a.navbar-brand {
   font-family: 'Amatic SC', cursive;
   font-size: 28px;
+  line-height: 28px;
 }
 
 .page-content 

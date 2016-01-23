@@ -1,5 +1,5 @@
 <?php 
-require_once(realpath(__DIR__ . '/../includes/config.php'));
+require_once realpath(__DIR__ . '/../includes/config.php');
 
 if(!$user->isLoggedIn()) {
   //header('Location: login.php');
@@ -20,34 +20,53 @@ if(!$user->isLoggedIn()) {
     <link href='https://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <div id="login">
+    <div id="wrap">
+      <div class="container">
   
-  <?php
-  if(isset($_POST['submit'])) {
-    
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
-    
-    if($user->login($username, $password)) {
-      
-      //logged in return to index page
-      header('Location: index.php');
-      exit;
-    }
-    else {
-      $message = '<p>Wrong username or password</p>';
-    }
-  }
-  
-  if(isset($message)) {
-      echo $message;
-  }
-  ?>
-      <form action="" method="post">
-        <p><label>Username</label><input type="text" name="username" value="" /></p>
-        <p><label>Password</label><input type="password" name="password" value="" /></p>
-        <p><label></label><input type="submit" name="submit" value="login" /></p>
-      </form>
+        <?php
+        if(isset($_POST['submit'])) {
+          
+          $username = trim($_POST['username']);
+          $password = trim($_POST['password']);
+          
+          if($user->login($username, $password)) {
+            
+            //logged in return to index page
+            header('Location: index.php');
+            exit;
+          }
+          else {
+            $message = '<p>Wrong username or password</p>';
+          }
+        }
+        
+        if(isset($message)) {
+            echo $message;
+        }
+        ?>
+        
+        <h1> Bleepingbugs Admin Login</h1>
+
+        <form class="form-horizontal" action="" method="post">
+          <div class="form-group">
+            <label class="control-label col-md-1">Username</label>
+            <div class="col-md-4">
+              <input class="form-control" type="text" name="username" value="" />
+             </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-1">Password</label>
+            <div class="col-md-4">
+              <input class="form-control" type="password" name="password" value="" />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-1 col-md-offset-1">
+              <button class="btn btn-default" type="submit" name="submit">Login</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </body>
 </html>

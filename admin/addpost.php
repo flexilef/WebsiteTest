@@ -46,35 +46,45 @@
     <link href='https://fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <?php require 'menu.php'; ?>
-    
-    <h2>Add Post</h2>
-    
-    <form action='' method='post'>
-      <p><label>Title</label><br />
-      <input type='text' name='postTitle' value='<?php if(isset($error)) { echo $_POST['postTitle'];} ?>'></p>
-      
-      <p><label>Subtitle</label><br />
-      <input type='text' name='postSubtitle' value='<?php if(isset($error)) { echo $_POST['postSubtitle'];} ?>'></p>
-      
-      <p><label>Content</label><br />
-      <textarea name='postContent' cols='60' rows='10'><?php if(isset($error)) { echo $_POST['postContent'];} ?></textarea></p>
-      
-      <p><input type='submit' name='submit' value='Submit'></p>
-    </form>
-    
-    <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
-    <script>
-        tinymce.init({
-            selector: "textarea",
-            plugins: [
-                "advlist autolink lists link image charmap print preview anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table contextmenu paste"
-            ],
-            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-        });
-    </script>
+    <div id="wrap">
+      <div class="container">
+        <?php require 'menu.php'; ?>
+        
+        <h2 class="text-center">Add Post</h2>
+        <form class="form-horizontal" action='' method='post'>
+          <div class="form-group">
+            <label class="control-label" for="postTitle">Title</label>
+            <input class="form-control" type='text' name='postTitle' id="postTitle" value='<?php if(isset($error)) { echo $_POST['postTitle'];} ?>'>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="postSubtitle">Subtitle</label>
+            <input class="form-control" type='text' name='postSubtitle' id="postSubtitle" value='<?php if(isset($error)) { echo $_POST['postSubtitle'];} ?>'>
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="postSubtitle">Content</label>
+            <textarea class="form-control" name='postContent' cols='60' rows='10'><?php if(isset($error)) { echo $_POST['postContent'];} ?></textarea>
+          </div>
+          <div class="form-group">
+            <div class="col-md-1">
+              <button class="btn btn-default" type='submit' name='submit'>Submit</button>
+            </div>
+          </div>
+        </form>
+        
+        <script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+        <script>
+            tinymce.init({
+                selector: "textarea",
+                plugins: [
+                    "advlist autolink lists link image charmap print preview anchor",
+                    "searchreplace visualblocks code fullscreen",
+                    "insertdatetime media table contextmenu paste"
+                ],
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+            });
+        </script>
+      </div>
+    </div>
   </body>
 </html>
 

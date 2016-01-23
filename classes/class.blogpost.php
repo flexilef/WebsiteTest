@@ -1,5 +1,5 @@
 <?php
-require_once('classes/class.database.php');
+require_once 'class.database.php';
 
 class Blogpost
 {
