@@ -10,8 +10,8 @@
 <ul class="list-inline">
   <?php foreach($tags as $tag) : ?>
     <li>
-      <b><a class="font-decorative" href="/test/blog/tags/<?php echo $tag['name_slug']; ?> ">
-      <?php echo $tag['name']; ?></a></b>
+      <b><a class="font-decorative" href="/test/blog/tags/<?php echo $tag['tag_slug']; ?> ">
+      <?php echo $tag['tag_name']; ?></a></b>
     </li>
   <?php endforeach; ?>
 </ul>

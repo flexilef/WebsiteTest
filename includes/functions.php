@@ -39,8 +39,8 @@ function getBlogpostByID($id) {
     
     if(!empty($rows)) {
       $post = new Blogpost($rows[0]['id'], $rows[0]['title'], $rows[0]['title_slug'],
-                            $rows[0]['subtitle'], $rows[0]['post'], $rows[0]['author_id'], 
-                            $rows[0]['date_posted']);
+                            $rows[0]['subtitle'], $rows[0]['post'], $rows[0]['postDesc'], 
+                            $rows[0]['author_id'], $rows[0]['date_posted']);
     }
     else
       return null;
@@ -58,7 +58,7 @@ function getBlogpostsByTag($tagName) {
     . "WHERE blog_post_tags.tag_id IN "
     . " (SELECT tags.id "
     . " FROM tags"
-    . " WHERE tags.name_slug = ?)";
+    . " WHERE tags.tag_slug = ?)";
     
   $params = array($tagName);
   $rows = $db->select($query, $params);
@@ -67,7 +67,7 @@ function getBlogpostsByTag($tagName) {
   if(!empty($rows)) {
     foreach($rows as $row) {
       $post = new Blogpost($row['id'], $row['title'], $row['title_slug'],
-                            $row['subtitle'], $row['post'], $row['author_id'], 
+                            $row['subtitle'], $row['post'], $row['postDesc'], $row['author_id'], 
                             $row['date_posted']);
                             
       array_push($postArray, $post);
@@ -96,7 +96,7 @@ function getBlogpostsByDateRange($startDate, $endDate) {
   if(!empty($rows)) {
     foreach($rows as $row) {
       $post = new Blogpost($row['id'], $row['title'], $row['title_slug'],
-                            $row['subtitle'], $row['post'], $row['author_id'], 
+                            $row['subtitle'], $row['post'], $row['postDesc'], $row['author_id'], 
                             $row['date_posted']);
       
       array_push($postArray, $post);
@@ -129,7 +129,7 @@ function getRecentBlogposts($offset, $count) {
   if(!empty($rows)) {
     foreach($rows as $row) {
       $post = new Blogpost($row['id'], $row['title'], $row['title_slug'],
-                            $row['subtitle'], $row['post'], $row['author_id'], 
+                            $row['subtitle'], $row['post'], $row['postDesc'], $row['author_id'], 
                             $row['date_posted']);
       
       array_push($postArray, $post);      
@@ -157,8 +157,8 @@ function getPreviousBlogpost($currentID) {
     
     if(!empty($rows)) {
       $previousPost = new Blogpost($rows[0]['id'], $rows[0]['title'], $rows[0]['title_slug'],
-                            $rows[0]['subtitle'], $rows[0]['post'], $rows[0]['author_id'], 
-                            $rows[0]['date_posted']);
+                            $rows[0]['subtitle'], $rows[0]['post'], $rows[0]['postDesc'], 
+                            $rows[0]['author_id'], $rows[0]['date_posted']);
     }
     else 
       return null;
@@ -185,8 +185,8 @@ function getNextBlogpost($currentID) {
     
     if(!empty($rows)) {
       $nextPost = new Blogpost($rows[0]['id'], $rows[0]['title'], $rows[0]['title_slug'],
-                            $rows[0]['subtitle'], $rows[0]['post'], $rows[0]['author_id'], 
-                            $rows[0]['date_posted']);
+                            $rows[0]['subtitle'], $rows[0]['post'], $rows[0]['postDesc'],
+                            $rows[0]['author_id'], $rows[0]['date_posted']);
     }
     else
       return null;
@@ -221,7 +221,7 @@ function getArchiveDates() {
 function getAllTags() {
   $db = new Database();
   
-  $query = "SELECT tags.name, tags.name_slug FROM tags";
+  $query = "SELECT tags.tag_name, tags.tag_slug FROM tags";
   $tags = $db->select($query);
 
   return $tags;

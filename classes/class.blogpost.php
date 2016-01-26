@@ -8,6 +8,7 @@ class Blogpost
   private $titleSlug;
   private $subtitle;
   private $post;
+  private $postDesc;
   private $author;
   private $datePosted;
   private $tags = array();
@@ -15,7 +16,7 @@ class Blogpost
   private $connection;
 
   function __construct($inID=null, $inTitle=null, $inSlug=null, $inSubtitle=null, 
-                        $inPost=null, $inAuthorID=null, $inDatePosted=null)
+                        $inPost=null, $inPostDesc=null, $inAuthorID=null, $inDatePosted=null)
   {
     $db = new Database();
 
@@ -23,7 +24,7 @@ class Blogpost
       $this->id = $inID;
       
       //setup tags
-      $query = "SELECT name FROM tags WHERE id IN (
+      $query = "SELECT tag_name FROM tags WHERE id IN (
         SELECT tag_id
         FROM blog_post_tags
         WHERE blog_post_id = $inID);";
@@ -32,7 +33,7 @@ class Blogpost
 
       if(!empty($rows)) {
         foreach($rows as $row) {
-          array_push($this->tags, $row['name']);
+          array_push($this->tags, $row['tag_name']);
         }
       }
     }
@@ -52,10 +53,14 @@ class Blogpost
     if(!empty($inPost)) {
       $this->post = $inPost;
     }
+    
+    if(!empty($inPostDesc)) {
+      $this->postDesc = $inPostDesc;
+    }
 
     if(!empty($inAuthorID))
     {     
-      $query = "SELECT first_name, last_name FROM people WHERE id = ?";
+      $query = "SELECT first_name, last_name FROM blog_members WHERE id = ?";
       
       $params = array($inAuthorID);
       $row = $db->select($query, $params);
